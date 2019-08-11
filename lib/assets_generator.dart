@@ -43,7 +43,7 @@ void generateAssets(
         int start = yamlString.indexOf("assets:");
 
         YamlList list = flutter["assets"];
-        if (list.last != null && start > -1) {
+        if (list != null && list.last != null && start > -1) {
           var lastString = list.last.toString();
           int end = yamlString.indexOf(lastString, start);
 

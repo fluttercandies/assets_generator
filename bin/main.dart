@@ -2,6 +2,7 @@ import 'package:assets_generator/assets_generator.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 
 main(List<String> arguments) {
+  print("assets_generator----------------start");
   PackageGraph packageGraph;
   var path =
       arguments.firstWhere((x) => x.contains("path="), orElse: () => null);
@@ -26,4 +27,5 @@ main(List<String> arguments) {
           packageGraph: item, rootPath: root.path, type: generateType);
     }
   }
+  print("assets_generator----------------end");
 }
