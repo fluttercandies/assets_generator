@@ -1,0 +1,18 @@
+name: assets_generator
+description: auto generate assets configs in yaml.
+version: 1.0.0
+homepage: https://github.com/fluttercandies/assets_generator
+author: zmtzawqlp <zmtzawqlp@live.com>
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
+dependencies:
+  build_runner_core: ^3.0.0
+
+dev_dependencies:
+  pedantic: ^1.0.0
+  test: ^1.0.0
+
+executables:
+  assets_generator:
