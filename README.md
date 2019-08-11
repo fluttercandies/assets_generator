@@ -32,9 +32,9 @@ you need to add pub bin path into your system path.
 
 ### Execute Command
 
-`pub global activate assets_generator`
+- `pub global activate assets_generator`
 
-`assets_generator path=xxxx type=0`
+- `assets_generator path=xxxx type=0`
 
 | Parameter |       Description        |      Default      |
 | --------- | :----------------------: | :---------------: |
