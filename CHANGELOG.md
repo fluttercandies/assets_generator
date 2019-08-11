@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Handle yaml has no assets node
+
 ## 1.0.0
 
 - Initial version, created by Stagehand

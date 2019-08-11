@@ -49,11 +49,12 @@ void generateAssets(
 
           yamlString = yamlString.replaceRange(
               start, end + lastString.length, sb.toString());
-          print(
-              "auto generate assets configs successfully at ${path}/pubspec.yaml");
-          file.writeAsStringSync(yamlString);
+        } else {
+          yamlString += "\n${sb.toString()}";
         }
-
+        print(
+            "auto generate assets configs successfully at ${path}/pubspec.yaml");
+        file.writeAsStringSync(yamlString);
         // YamlList list = YamlList.wrap(fileList);
 
         // Map yamlList = Map();

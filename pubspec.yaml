@@ -1,6 +1,6 @@
 name: assets_generator
 description: auto generate assets configs in yaml.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/fluttercandies/assets_generator
 author: zmtzawqlp <zmtzawqlp@live.com>
 
