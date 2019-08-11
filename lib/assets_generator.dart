@@ -27,8 +27,7 @@ void generateAssets(
 
         var files = assetsDirectory.listSync(recursive: true);
         sb.write("assets:\n");
-        if(type==GenerateType.directory)
-        {
+        if (type == GenerateType.directory) {
           sb.write("    - assets/\n");
         }
         for (FileSystemEntity item in files) {

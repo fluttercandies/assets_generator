@@ -1,4 +1,4 @@
-## 1.0.3
+## 1.1.0
 
 - Handle yaml has no assets node
 
