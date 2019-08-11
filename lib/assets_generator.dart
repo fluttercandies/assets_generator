@@ -27,13 +27,17 @@ void generateAssets(
 
         var files = assetsDirectory.listSync(recursive: true);
         sb.write("assets:\n");
+        if(type==GenerateType.directory)
+        {
+          sb.write("    - assets/\n");
+        }
         for (FileSystemEntity item in files) {
           if ((type == GenerateType.file &&
                   item.statSync().type == FileSystemEntityType.file) ||
               (type == GenerateType.directory &&
                   item.statSync().type == FileSystemEntityType.directory)) {
             sb.write(
-                "    - ${item.path.replaceAll(packageGraph.path + "/", "").replaceAll("\\", "/")}");
+                "    - ${item.path.replaceAll(path + "/", "").replaceAll("\\", "/")}");
             if (item != files.last) {
               sb.write("\n");
             }
