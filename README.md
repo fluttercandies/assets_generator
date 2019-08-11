@@ -15,7 +15,7 @@ auto generate assets configs in yaml.
 ```dart
 
 dev_dependencies:
-  assets_generator: ^1.0.0  
+  assets_generator: ^1.0.1 
 
 ```
 
