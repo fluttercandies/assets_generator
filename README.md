@@ -39,4 +39,4 @@ you need to add pub bin path into your system path.
 | Parameter |       Description        |      Default      |
 | --------- | :----------------------: | :---------------: |
 | path      |    your project path     | current directory |
-| Windows*  | 0 = directory ; 1 = file |         0         |
+| type      | 0 = directory ; 1 = file |         0         |
