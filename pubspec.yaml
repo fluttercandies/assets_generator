@@ -1,6 +1,6 @@
 name: assets_generator
 description: help flutter developer to quickly auto generate assets configs in yaml.
-version: 1.1.1
+version: 2.0.0
 homepage: https://github.com/fluttercandies/assets_generator
 author: zmtzawqlp <zmtzawqlp@live.com>
 
@@ -12,7 +12,7 @@ dependencies:
   io: any
   path: any
   args: any
-  meta: any
+  meta: ^1.2.3
   dart_style: any
 
 

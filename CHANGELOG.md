@@ -1,3 +1,8 @@
+## 2.0.0
+
+- Support watch
+- Support generate consts.
+
 ## 1.1.1
 
 - Handle yaml has no assets node
