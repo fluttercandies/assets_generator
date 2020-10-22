@@ -8,9 +8,9 @@ import 'package:path/path.dart';
 
 const String argumentsFile = 'assets_generator_arguments';
 const String debugArguments =
-    '-p /Users/roott/Documents/github/assets_generator/example -s -t f';
+    '-p E:/Flutter/FlutterCandies/assets_generator/example -s -t f';
 Future<void> main(List<String> arguments) async {
-  arguments = debugArguments.split(' ');
+  //arguments = debugArguments.split(' ');
   bool runFromLocal = false;
   if (arguments.isEmpty) {
     final File file = File(join('./', argumentsFile));

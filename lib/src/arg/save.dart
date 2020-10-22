@@ -10,7 +10,7 @@ class Save extends Argument {
 
   @override
   String get help =>
-      'Save the arguments into local, it will execute local arguments if run "agen" without any arguments';
+      'Save the arguments into local.\nIt will execute local arguments \nif run "agen" without any arguments';
 
   @override
   String get name => 'save';
