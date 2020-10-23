@@ -14,9 +14,9 @@ Languages: English | [中文简体](README-ZH.md)
       - [Help](#help)
       - [Demo](#demo)
       - [All Commands](#all-commands)
-  - [Dart](#dart)
-    - [Work in Project](#work-in-project)
-    - [Work in Modules](#work-in-modules)
+    - [Dart](#dart)
+      - [Work in Project](#work-in-project)
+      - [Work in Modules](#work-in-modules)
 
 ## Usage
 
@@ -72,15 +72,15 @@ you need to add pub bin path into your system path.
                     (defaults to "Assets")
 ```                    
 
-## Dart
+### Dart
 
-### Work in Project
+#### Work in Project
 
 ``` dart
     Image.asset(Assets.assets_images_xxx_jpg);
 ```  
 
-### Work in Modules
+#### Work in Modules
 
 ``` dart
     Image.asset(

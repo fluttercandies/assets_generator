@@ -14,9 +14,9 @@ Languages: [English](README.md) | 中文简体
       - [帮助命令](#帮助命令)
       - [生成命令的例子](#生成命令的例子)
       - [全部命令](#全部命令)
-  - [Dart](#dart)
-    - [在单个项目中使用](#在单个项目中使用)
-    - [在模块中使用](#在模块中使用)
+    - [Dart](#dart)
+      - [在单个项目中使用](#在单个项目中使用)
+      - [在模块中使用](#在模块中使用)
 
 ## 使用
 
@@ -72,15 +72,15 @@ Languages: [English](README.md) | 中文简体
                     (默认 "Assets")
 ```                    
 
-## Dart
+### Dart
 
-### 在单个项目中使用
+#### 在单个项目中使用
 
 ``` dart
     Image.asset(Assets.assets_images_xxx_jpg);
 ```  
 
-### 在模块中使用
+#### 在模块中使用
 
 ``` dart
     Image.asset(
