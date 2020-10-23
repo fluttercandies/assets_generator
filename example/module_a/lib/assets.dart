@@ -5,7 +5,8 @@
 class Assets {
   Assets._();
   static const String package = 'module_a';
-  static const String assets_xxx_txt = 'assets/xxx.txt';
-  static const String assets_images_xxx_jpg = 'assets/images/xxx.jpg';
+  static const String assets_abc_txt = 'assets/abc.txt';
+  static const String assets_images_flutter_candies_logo_png =
+      'assets/images/flutter_candies_logo.png';
   static const String assets_images_test_txt = 'assets/images/test.txt';
 }

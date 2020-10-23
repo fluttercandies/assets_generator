@@ -73,5 +73,6 @@ flutter:
 
 
   assets:
-   - assets/images/
-   - assets/
+   - assets/dd.txt
+   - assets/images/flutter_candies_logo.png
+   - assets/test.txt

@@ -6,7 +6,6 @@ homepage:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
 
 dependencies:
   flutter:
@@ -23,5 +22,6 @@ dev_dependencies:
 
 flutter:
   assets:
-   - assets/
-   - assets/images/
+   - assets/abc.txt
+   - assets/images/flutter_candies_logo.png
+   - assets/images/test.txt

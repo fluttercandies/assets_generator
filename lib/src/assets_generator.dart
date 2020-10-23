@@ -59,7 +59,7 @@ class Generator {
     if (formatType == FormatType.directory) {
       final List<String> directories = <String>[];
       for (final String asset in assets) {
-        final String d = '${dirname(asset)}$separator';
+        final String d = '${dirname(asset)}/';
         if (!directories.contains(d)) {
           directories.add(d);
         }
@@ -95,8 +95,9 @@ class Generator {
         );
       } else if (fileStat.type == FileSystemEntityType.file) {
         if (basename(item.path) != '.DS_Store') {
-          assets
-              .add(item.path.replaceAll('${packageGraph.path}$separator', ''));
+          assets.add(item.path
+              .replaceAll('${packageGraph.path}$separator', '')
+              .replaceAll(separator, '/'));
         }
       }
     }

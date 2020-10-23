@@ -1,8 +1,8 @@
 ## 2.0.1
 
-* Update readme
 * Fix generate file when assets is empty.
-
+* Fix error on windows.
+*
 ## 2.0.0
 
 * Support watch
