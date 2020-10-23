@@ -23,6 +23,5 @@ dev_dependencies:
 
 flutter:
   assets:
-   - assets/xxx.txt
-   - assets/images/xxx.jpg
-   - assets/images/test.txt
+   - assets/
+   - assets/images/

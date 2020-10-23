@@ -1,18 +1,18 @@
 import 'arg.dart';
 import 'arg_parser.dart';
 
-class Path extends Argument {
+class Folder extends Argument {
   @override
-  String get abbr => 'p';
+  String get abbr => 'f';
 
   @override
-  dynamic get defaultsTo => '.';
+  dynamic get defaultsTo => 'assets';
 
   @override
-  String get help => 'Flutter project root path';
+  String get help => 'The root folder of assets';
 
   @override
-  String get name => 'path';
+  String get name => 'folder';
 
   @override
   String get value {

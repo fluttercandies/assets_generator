@@ -1,5 +1,5 @@
-import 'package:args/args.dart';
 import 'arg.dart';
+import 'arg_parser.dart';
 
 class Type extends Argument {
   @override
@@ -10,15 +10,15 @@ class Type extends Argument {
 
   @override
   String get help =>
-      '''The type of format in pubsepec.yaml \n"d" means directory "- assets/images/" \n"f" means file      "- assets/images/xxx.jpg" ''';
+      '''The type in pubsepec.yaml \n"d" means directory "- assets/images/" \n"f" means file      "- assets/images/xxx.jpg" ''';
 
   @override
   String get name => 'type';
 
   @override
-  String value(ArgResults results) {
-    if (results.wasParsed(name)) {
-      return results[name] as String;
+  String get value {
+    if (argResults.wasParsed(name)) {
+      return argResults[name] as String;
     }
     return defaultsTo as String;
   }

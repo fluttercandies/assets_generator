@@ -1,5 +1,5 @@
-import 'package:args/args.dart';
 import 'arg.dart';
+import 'arg_parser.dart';
 
 class Watch extends Argument {
   @override
@@ -9,15 +9,15 @@ class Watch extends Argument {
   dynamic get defaultsTo => true;
 
   @override
-  String get help => 'Continue to monitor changes of assets';
+  String get help => 'Whether continue to monitor the changes of assets';
 
   @override
   String get name => 'watch';
 
   @override
-  bool value(ArgResults results) {
-    if (results.wasParsed(name)) {
-      return results[name] as bool;
+  bool get value {
+    if (argResults.wasParsed(name)) {
+      return argResults[name] as bool;
     }
     return defaultsTo as bool;
   }

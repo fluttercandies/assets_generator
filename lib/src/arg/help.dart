@@ -1,5 +1,5 @@
-import 'package:args/args.dart';
 import 'arg.dart';
+import 'arg_parser.dart';
 
 class Help extends Argument {
   @override
@@ -15,9 +15,9 @@ class Help extends Argument {
   String get name => 'help';
 
   @override
-  bool value(ArgResults results) {
-    if (results.wasParsed(name)) {
-      return results[name] as bool;
+  bool get value {
+    if (argResults.wasParsed(name)) {
+      return argResults[name] as bool;
     }
     return defaultsTo as bool;
   }

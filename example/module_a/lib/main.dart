@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'assets.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -59,6 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Image.asset(
+      Assets.assets_images_xxx_jpg,
+      package: Assets.package,
+    );
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

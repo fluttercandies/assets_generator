@@ -1,4 +1,3 @@
-import 'package:args/args.dart';
 import 'arg_parser.dart';
 
 abstract class Argument {
@@ -9,6 +8,13 @@ abstract class Argument {
     } else if (defaultsTo is String) {
       parser.addOption(name,
           abbr: abbr, help: help, defaultsTo: defaultsTo as String);
+    } else if (defaultsTo is List<String>) {
+      parser.addMultiOption(
+        name,
+        abbr: abbr,
+        help: help,
+        defaultsTo: defaultsTo as List<String>,
+      );
     } else {
       // TODO(zmtzawqlp): not implement for now.
       throw Exception('not implement fill method');
@@ -31,5 +37,5 @@ abstract class Argument {
   dynamic get defaultsTo;
 
   /// The value this option
-  dynamic value(ArgResults results);
+  dynamic get value;
 }

@@ -4,8 +4,8 @@
 // **************************************************************************
 class Assets {
   Assets._();
-  static const String packageName = 'module_a';
-  static const String assetsXxxTxt = 'assets/xxx.txt';
-  static const String assetsImagesXxxJpg = 'assets/images/xxx.jpg';
-  static const String assetsImagesTestTxt = 'assets/images/test.txt';
+  static const String package = 'module_a';
+  static const String assets_xxx_txt = 'assets/xxx.txt';
+  static const String assets_images_xxx_jpg = 'assets/images/xxx.jpg';
+  static const String assets_images_test_txt = 'assets/images/test.txt';
 }

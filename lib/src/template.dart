@@ -1,6 +1,5 @@
+import 'package:assets_generator/assets_generator.dart';
 import 'package:build_runner_core/build_runner_core.dart';
-
-import 'camel_under_score_converter.dart';
 
 const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************
@@ -8,22 +7,31 @@ const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************
 ''';
 
-String get classDeclare => 'class Assets {\n Assets._();';
+String get classDeclare => 'class {0} {\n {0}._();';
 String get classDeclareFooter => '}\n';
 
 class Template {
-  Template(this.assets, this.packageGraph);
+  Template(
+    this.assets,
+    this.packageGraph,
+    this.rule,
+    this.class1,
+  );
   final PackageNode packageGraph;
   final List<String> assets;
+  final Rule rule;
+  final Class class1;
 
   @override
   String toString() {
     final StringBuffer sb = StringBuffer();
     sb.write(license);
-    sb.write(classDeclare);
+    sb.write(classDeclare.replaceAll(
+      '{0}',
+      class1.go('ucc'),
+    ));
     if (!packageGraph.isRoot) {
-      sb.write(
-          '''static const String packageName = '${packageGraph.name}';\n''');
+      sb.write('''static const String package = '${packageGraph.name}';\n''');
     }
     for (final String asset in assets) {
       sb.write(formatFiled(asset));
@@ -45,10 +53,6 @@ class Template {
         .replaceAll(' ', '_')
         .replaceAll('-', '_')
         .replaceAll('@', '_AT_');
-    return camelName(path);
-  }
-
-  String toUppercaseFirstLetter(String str) {
-    return '${str[0].toUpperCase()}${str.substring(1)}';
+    return rule.go(path);
   }
 }

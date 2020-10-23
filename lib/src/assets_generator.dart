@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:assets_generator/assets_generator.dart';
 import 'package:assets_generator/src/format.dart';
 import 'package:assets_generator/src/watcher.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
+import 'arg/rule.dart';
 import 'arg/type.dart';
 import 'template.dart';
 
@@ -12,16 +14,20 @@ class Generator {
   Generator({
     this.packageGraph,
     this.formatType = FormatType.directory,
-    this.rootName = 'assets',
+    this.folder = 'assets',
     this.watch = true,
     this.output = 'lib',
+    this.rule,
+    this.class1,
   });
 
   final PackageNode packageGraph;
-  final String rootName;
+  final String folder;
   final FormatType formatType;
   final bool watch;
   final String output;
+  final Rule rule;
+  final Class class1;
 
   void go() {
     if (watch) {
@@ -38,7 +44,7 @@ class Generator {
     if (!yamlFile.existsSync()) {
       throw Exception('$path is not a Flutter project.');
     }
-    final Directory assetsDirectory = Directory(join(path, rootName));
+    final Directory assetsDirectory = Directory(join(path, folder));
     if (!assetsDirectory.existsSync()) {
       assetsDirectory.createSync();
     }
@@ -144,7 +150,9 @@ class Generator {
 
   void generateFile(List<String> assets) {
     final String path = packageGraph.path;
-    final File file = File(join(path, output, 'assets.dart'));
+    final String fileName = class1.go('lwu');
+
+    final File file = File(join(path, output, '$fileName.dart'));
 
     if (!file.existsSync()) {
       file.createSync(recursive: true);
@@ -152,7 +160,12 @@ class Generator {
 
     file.writeAsStringSync(
       formatDart(
-        Template(assets, packageGraph).toString(),
+        Template(
+          assets,
+          packageGraph,
+          rule,
+          class1,
+        ).toString(),
       ),
     );
   }

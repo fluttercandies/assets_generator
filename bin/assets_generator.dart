@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:args/args.dart';
+import 'package:assets_generator/src/arg/class.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:assets_generator/assets_generator.dart';
 import 'package:io/ansi.dart';
@@ -11,6 +10,8 @@ const String debugArguments =
     '-p E:/Flutter/FlutterCandies/assets_generator/example -s -t f';
 Future<void> main(List<String> arguments) async {
   //arguments = debugArguments.split(' ');
+
+  //regExpTest();
   bool runFromLocal = false;
   if (arguments.isEmpty) {
     final File file = File(join('./', argumentsFile));
@@ -23,21 +24,22 @@ Future<void> main(List<String> arguments) async {
 
   final Help help = Help();
   final Path path = Path();
-  final Root root = Root();
+  final Folder folder = Folder();
   final Watch watch = Watch();
   final Type type = Type();
   final Save save = Save();
   final Output output = Output();
-  final ArgResults results = parseArgs(arguments);
-  if (arguments.isEmpty || help.value(results)) {
+  final Rule rule = Rule();
+  final Class class1 = Class();
+  parseArgs(arguments);
+  if (arguments.isEmpty || help.value) {
     print(green.wrap(parser.usage));
     return;
   }
 
-  final PackageGraph packageGraph =
-      await PackageGraph.forPath(path.value(results));
+  final PackageGraph packageGraph = await PackageGraph.forPath(path.value);
 
-  final bool isWatch = watch.value(results);
+  final bool isWatch = watch.value;
 
   print('generate assets start');
   if (packageGraph != null) {
@@ -49,14 +51,16 @@ Future<void> main(List<String> arguments) async {
     )) {
       Generator(
         packageGraph: packageNode,
-        rootName: root.value(results),
-        formatType: type.type(type.value(results)),
+        folder: folder.value,
+        formatType: type.type(type.value),
         watch: isWatch,
-        output: output.value(results),
+        output: output.value,
+        rule: rule,
+        class1: class1,
       ).go();
     }
   }
-  if (save.value(results) && !runFromLocal) {
+  if (save.value && !runFromLocal) {
     final File file = File(join('./', argumentsFile));
     if (!file.existsSync()) {
       file.createSync();
