@@ -149,6 +149,9 @@ class Generator {
   }
 
   void generateFile(List<String> assets) {
+    if (assets == null || assets.isEmpty) {
+      return;
+    }
     final String path = packageGraph.path;
     final String fileName = class1.go('lwu');
 

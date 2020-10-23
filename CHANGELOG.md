@@ -1,6 +1,7 @@
 ## 2.0.1
 
 * Update readme
+* Fix generate file when assets is empty.
 
 ## 2.0.0
 
