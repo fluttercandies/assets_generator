@@ -1,6 +1,5 @@
 import 'package:assets_generator/assets_generator.dart';
 import 'package:build_runner_core/build_runner_core.dart';
-import 'package:path/path.dart';
 
 const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************
