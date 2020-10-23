@@ -4,6 +4,8 @@ The flutter tool to generate assets‘s configs(yaml) and consts automatically f
 
 [![pub package](https://img.shields.io/pub/v/assets_generator.svg)](https://pub.dartlang.org/packages/assets_generator) [![GitHub stars](https://img.shields.io/github/stars/fluttercandies/assets_generator)](https://github.com/fluttercandies/assets_generator/stargazers) [![GitHub forks](https://img.shields.io/github/forks/fluttercandies/assets_generator)](https://github.com/fluttercandies/assets_generator/network) [![GitHub license](https://img.shields.io/github/license/fluttercandies/assets_generator)](https://github.com/fluttercandies/assets_generator/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/fluttercandies/assets_generator)](https://github.com/fluttercandies/assets_generator/issues) <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5bcc0gy"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="flutter-candies" title="flutter-candies"></a>
 
+![](assets_generator.gif)
+
 Languages: English | [中文简体](README-ZH.md)
 
 - [assets_generator](#assets_generator)
@@ -38,9 +40,9 @@ you need to add pub bin path into your system path.
 ### Command
 
 #### Help
- 
+
 `agen -h` 
- 
+
 #### Demo
 
 `agen -t d -s -r lwu` 
@@ -70,7 +72,7 @@ you need to add pub bin path into your system path.
                     (defaults to "lwu")
 -c, --class         The name of const Class
                     (defaults to "Assets")
-```                    
+```
 
 ### Dart
 
@@ -78,7 +80,7 @@ you need to add pub bin path into your system path.
 
 ``` dart
     Image.asset(Assets.assets_images_xxx_jpg);
-```  
+```
 
 #### Work in Modules
 
@@ -87,4 +89,4 @@ you need to add pub bin path into your system path.
       Assets.assets_images_xxx_jpg,
       package: Assets.package,
     );
-```  
+```
