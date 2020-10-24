@@ -1,7 +1,11 @@
+## 2.0.3
+
+* Fix generate resolution image assets's consts
+
 ## 2.0.2
 
-* Fix generate file when assets is empty.
-* Fix error on windows.
+* Fix generate file when assets is empty
+* Fix error on windows
 
 ## 2.0.0
 

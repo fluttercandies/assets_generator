@@ -74,5 +74,8 @@ flutter:
 
   assets:
    - assets/dd.txt
+   - assets/images/1.5x/flutter_candies_logo.png
+   - assets/images/2.0x/flutter_candies_logo.png
+   - assets/images/3.0x/flutter_candies_logo.png
    - assets/images/flutter_candies_logo.png
    - assets/test.txt

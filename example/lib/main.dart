@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'assets.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -97,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
             ),
+            Image.asset(Assets.assets_images_flutter_candies_logo_png),
           ],
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:assets_generator/assets_generator.dart';
 import 'package:build_runner_core/build_runner_core.dart';
+import 'package:io/ansi.dart';
+import 'package:path/path.dart';
 
 const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************
@@ -7,7 +9,7 @@ const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************
 ''';
 
-String get classDeclare => 'class {0} {\n {0}._();';
+String get classDeclare => 'class {0} {\n const {0}._();';
 String get classDeclareFooter => '}\n';
 
 class Template {
@@ -33,7 +35,26 @@ class Template {
     if (!packageGraph.isRoot) {
       sb.write('''static const String package = '${packageGraph.name}';\n''');
     }
+    // 1.5x,2.0x,3.0x
+    final RegExp regExp = RegExp(r'(([0-9]+).([0-9]+)|([0-9]+))x/');
+    // check resolution image assets
+    final List<String> list = assets.toList();
     for (final String asset in assets) {
+      final String r = asset.replaceAllMapped(regExp, (Match match) {
+        return '';
+      });
+      //macth
+      if (r != asset) {
+        if (!list.contains(r)) {
+          throw Exception(red
+              .wrap('miss main asset entry: ${packageGraph.path}$separator$r'));
+          //list.add(r);
+        }
+        list.remove(asset);
+      }
+    }
+
+    for (final String asset in list) {
       sb.write(formatFiled(asset));
     }
 
