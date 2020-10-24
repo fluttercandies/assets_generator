@@ -62,7 +62,7 @@ class Generator {
 
     generateConstsFile(assets);
 
-    writeYaml(yamlFile, assets,miss);
+    writeYaml(yamlFile, assets, miss);
 
     return dirList;
   }
