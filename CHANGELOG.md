@@ -1,3 +1,7 @@
+## 2.0.4
+
+* Remove resolution image assets from yaml
+
 ## 2.0.3
 
 * Fix generate resolution image assets's consts

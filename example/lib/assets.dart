@@ -5,7 +5,9 @@
 class Assets {
   const Assets._();
   static const String assets_dd_txt = 'assets/dd.txt';
+
+  static const String assets_test_txt = 'assets/test.txt';
+
   static const String assets_images_flutter_candies_logo_png =
       'assets/images/flutter_candies_logo.png';
-  static const String assets_test_txt = 'assets/test.txt';
 }

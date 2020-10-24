@@ -1,7 +1,5 @@
 import 'package:assets_generator/assets_generator.dart';
 import 'package:build_runner_core/build_runner_core.dart';
-import 'package:io/ansi.dart';
-import 'package:path/path.dart';
 
 const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************
@@ -33,28 +31,10 @@ class Template {
       class1.go('ucc'),
     ));
     if (!packageGraph.isRoot) {
-      sb.write('''static const String package = '${packageGraph.name}';\n''');
-    }
-    // 1.5x,2.0x,3.0x
-    final RegExp regExp = RegExp(r'(([0-9]+).([0-9]+)|([0-9]+))x/');
-    // check resolution image assets
-    final List<String> list = assets.toList();
-    for (final String asset in assets) {
-      final String r = asset.replaceAllMapped(regExp, (Match match) {
-        return '';
-      });
-      //macth
-      if (r != asset) {
-        if (!list.contains(r)) {
-          throw Exception(red
-              .wrap('miss main asset entry: ${packageGraph.path}$separator$r'));
-          //list.add(r);
-        }
-        list.remove(asset);
-      }
+      sb.write('''\nstatic const String package = '${packageGraph.name}';\n''');
     }
 
-    for (final String asset in list) {
+    for (final String asset in assets) {
       sb.write(formatFiled(asset));
     }
 
@@ -64,7 +44,7 @@ class Template {
   }
 
   String formatFiled(String path) {
-    return '''static const String ${_formatFiledName(path)} = '$path';\n''';
+    return '''\nstatic const String ${_formatFiledName(path)} = '$path';\n''';
   }
 
   String _formatFiledName(String path) {

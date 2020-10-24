@@ -51,30 +51,19 @@ class Generator {
 
     final List<Directory> dirList = <Directory>[];
     final List<String> assets = <String>[];
+
     findAssets(assetsDirectory, assets, dirList);
-    final StringBuffer pubspecSb = StringBuffer();
 
-    generateFile(assets);
+    if (assets.isEmpty) {
+      return dirList;
+    }
+    // resolution image assets miss main asset entry
+    final List<String> miss = checkResolutionImageAssets(assets);
 
-    if (formatType == FormatType.directory) {
-      final List<String> directories = <String>[];
-      for (final String asset in assets) {
-        final String d = '${dirname(asset)}/';
-        if (!directories.contains(d)) {
-          directories.add(d);
-        }
-      }
-      assets.clear();
-      assets.addAll(directories);
-    }
-    if (assets.isNotEmpty) {
-      print(green.wrap('find following assets: '));
-    }
-    for (final String asset in assets) {
-      print(green.wrap(asset));
-      pubspecSb.write('   - $asset\n');
-    }
-    overrideYaml(yamlFile, pubspecSb.toString());
+    generateConstsFile(assets);
+
+    writeYaml(yamlFile, assets,miss);
+
     return dirList;
   }
 
@@ -103,10 +92,33 @@ class Generator {
     }
   }
 
-  void overrideYaml(File yamlFile, String newAssets) {
-    if (newAssets == null || newAssets.isEmpty) {
-      return;
+  void writeYaml(File yamlFile, List<String> assets, List<String> miss) {
+    if (formatType == FormatType.directory) {
+      final List<String> directories = <String>[];
+      for (final String asset in assets) {
+        // resolution image assets miss main asset entry
+        // It should define as a file
+        if (miss.contains(asset)) {
+          directories.add(asset);
+        } else {
+          final String d = '${dirname(asset)}/';
+          if (!directories.contains(d)) {
+            directories.add(d);
+          }
+        }
+      }
+      assets.clear();
+      assets.addAll(directories);
     }
+
+    final StringBuffer pubspecSb = StringBuffer();
+
+    for (final String asset in assets) {
+      pubspecSb.write('   - $asset\n');
+    }
+
+    final String newAssets = pubspecSb.toString();
+
     String yamlString = yamlFile.readAsStringSync();
     final YamlMap yaml = loadYaml(yamlString) as YamlMap;
 
@@ -149,10 +161,7 @@ class Generator {
     print(green.wrap('${yamlFile.path} is changed automatically.'));
   }
 
-  void generateFile(List<String> assets) {
-    if (assets == null || assets.isEmpty) {
-      return;
-    }
+  void generateConstsFile(List<String> assets) {
     final String path = packageGraph.path;
     final String fileName = class1.go('lwu');
 
@@ -172,5 +181,32 @@ class Generator {
         ).toString(),
       ),
     );
+  }
+
+  List<String> checkResolutionImageAssets(List<String> assets) {
+    print(green.wrap('find following assets: '));
+    // 1.5x,2.0x,3.0x
+    final RegExp regExp = RegExp(r'(([0-9]+).([0-9]+)|([0-9]+))x/');
+    // check resolution image assets
+    final List<String> list = assets.toList();
+    // miss main asset entry
+    final List<String> miss = <String>[];
+    for (final String asset in list) {
+      print(green.wrap(asset));
+      final String r = asset.replaceAllMapped(regExp, (Match match) {
+        return '';
+      });
+      //macth
+      if (r != asset) {
+        if (!assets.contains(r)) {
+          // throw Exception(red
+          //     .wrap('miss main asset entry: ${packageGraph.path}$separator$r'));
+          assets.add(r);
+          miss.add(r);
+        }
+        assets.remove(asset);
+      }
+    }
+    return miss;
   }
 }
