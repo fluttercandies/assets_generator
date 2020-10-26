@@ -1,3 +1,9 @@
+## 2.0.5
+
+* Add license into yaml
+* Fix yaml error
+* Sort assets
+
 ## 2.0.4
 
 * Remove resolution image assets from yaml

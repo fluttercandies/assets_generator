@@ -5,10 +5,10 @@ import 'package:assets_generator/src/watcher.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
-import 'package:yaml/yaml.dart';
 import 'arg/rule.dart';
 import 'arg/type.dart';
 import 'template.dart';
+import 'yaml.dart';
 
 class Generator {
   Generator({
@@ -57,12 +57,15 @@ class Generator {
     if (assets.isEmpty) {
       return dirList;
     }
+
     // resolution image assets miss main asset entry
     final List<String> miss = checkResolutionImageAssets(assets);
 
+    assets.sort((String a, String b) => a.compareTo(b));
+
     generateConstsFile(assets);
 
-    writeYaml(yamlFile, assets, miss);
+    Yaml(yamlFile, assets, miss, formatType).write();
 
     return dirList;
   }
@@ -90,75 +93,6 @@ class Generator {
         }
       }
     }
-  }
-
-  void writeYaml(File yamlFile, List<String> assets, List<String> miss) {
-    if (formatType == FormatType.directory) {
-      final List<String> directories = <String>[];
-      for (final String asset in assets) {
-        // resolution image assets miss main asset entry
-        // It should define as a file
-        if (miss.contains(asset)) {
-          directories.add(asset);
-        } else {
-          final String d = '${dirname(asset)}/';
-          if (!directories.contains(d)) {
-            directories.add(d);
-          }
-        }
-      }
-      assets.clear();
-      assets.addAll(directories);
-    }
-
-    final StringBuffer pubspecSb = StringBuffer();
-
-    for (final String asset in assets) {
-      pubspecSb.write('   - $asset\n');
-    }
-
-    final String newAssets = pubspecSb.toString();
-
-    String yamlString = yamlFile.readAsStringSync();
-    final YamlMap yaml = loadYaml(yamlString) as YamlMap;
-
-    if (yaml.containsKey('flutter')) {
-      final YamlMap flutter = yaml['flutter'] as YamlMap;
-      if (flutter != null && flutter.containsKey('assets')) {
-        final YamlList assetsNode = flutter['assets'] as YamlList;
-        if (assetsNode != null) {
-          final int start =
-              assetsNode.nodes.first.span.start.offset - '   - '.length;
-          final int end = assetsNode.span.end.offset;
-          yamlString = yamlString.replaceRange(
-            start,
-            end,
-            newAssets,
-          );
-        }
-        //Empty
-        else {
-          final int end = yamlString.lastIndexOf('assets:') + 'assets:'.length;
-          yamlString = yamlString.replaceRange(end, end, '\n$newAssets');
-        }
-      } else if (flutter != null) {
-        final int end = flutter.span.end.offset;
-        yamlString =
-            yamlString.replaceRange(end, end, '\n  assets:\n$newAssets');
-      }
-      //Empty
-      else {
-        final int end = yamlString.lastIndexOf('flutter:') + 'flutter:'.length;
-        yamlString =
-            yamlString.replaceRange(end, end, '\n  assets:\n$newAssets');
-      }
-    } else {
-      final int end = yaml.span.end.offset;
-      yamlString =
-          yamlString.replaceRange(end, end, 'flutter:\n  assets:\n$newAssets');
-    }
-    yamlFile.writeAsStringSync(yamlString);
-    print(green.wrap('${yamlFile.path} is changed automatically.'));
   }
 
   void generateConstsFile(List<String> assets) {

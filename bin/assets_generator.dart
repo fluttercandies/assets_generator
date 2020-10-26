@@ -7,7 +7,9 @@ import 'package:path/path.dart';
 
 const String argumentsFile = 'assets_generator_arguments';
 const String debugArguments =
-    '-p E:/Flutter/FlutterCandies/assets_generator/example -s -t f';
+    '-p /Users/zmtzawqlp/Documents/github/assets_generator/example -t f';
+// /Users/zmtzawqlp/Documents/github/assets_generator/example
+// E:/Flutter/FlutterCandies/assets_generator/example
 Future<void> main(List<String> arguments) async {
   //arguments = debugArguments.split(' ');
 
