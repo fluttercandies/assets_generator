@@ -54,10 +54,6 @@ class Generator {
 
     findAssets(assetsDirectory, assets, dirList);
 
-    if (assets.isEmpty) {
-      return dirList;
-    }
-
     // resolution image assets miss main asset entry
     final List<String> miss = checkResolutionImageAssets(assets);
 
@@ -101,9 +97,15 @@ class Generator {
 
     final File file = File(join(path, output, '$fileName.dart'));
 
-    if (!file.existsSync()) {
-      file.createSync(recursive: true);
+    if (file.existsSync()) {
+      file.deleteSync(recursive: true);
     }
+
+    if (assets.isEmpty) {
+      return;
+    }
+
+    file.createSync(recursive: true);
 
     file.writeAsStringSync(
       formatDart(
@@ -118,13 +120,17 @@ class Generator {
   }
 
   List<String> checkResolutionImageAssets(List<String> assets) {
+    // miss main asset entry
+    final List<String> miss = <String>[];
+    if (assets.isEmpty) {
+      return miss;
+    }
     print(green.wrap('find following assets: '));
     // 1.5x,2.0x,3.0x
     final RegExp regExp = RegExp(r'(([0-9]+).([0-9]+)|([0-9]+))x/');
     // check resolution image assets
     final List<String> list = assets.toList();
-    // miss main asset entry
-    final List<String> miss = <String>[];
+
     for (final String asset in list) {
       print(green.wrap(asset));
       final String r = asset.replaceAllMapped(regExp, (Match match) {

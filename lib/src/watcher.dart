@@ -25,18 +25,22 @@ class Watcher {
       return file.watch().listen((FileSystemEvent data) {
         if (data.isDirectory) {
           final Directory directory = Directory(data.path);
-          //empty directory
-          if (directory.listSync().isEmpty) {
-            if (data.type == FileSystemEvent.delete) {
-              if (watchMap.containsKey(directory)) {
-                watchMap[watchMap].cancel();
-              }
-              dirList.remove(directory);
+
+          if (data.type == FileSystemEvent.delete) {
+            if (watchMap.containsKey(directory)) {
+              watchMap[watchMap].cancel();
             }
+            dirList.remove(directory);
+          }
+          //empty directory
+          else if (directory.listSync().isEmpty) {
             return;
           }
-          _watch(directory);
-          dirList.add(directory);
+          //watch new directory
+          else {
+            _watch(directory);
+            dirList.add(directory);
+          }
         }
         String msg;
         switch (data.type) {

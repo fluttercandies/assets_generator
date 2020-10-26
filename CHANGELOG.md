@@ -1,3 +1,7 @@
+## 2.0.6
+
+* Delete consts file and clean yaml when assets are empty
+
 ## 2.0.5
 
 * Add license into yaml

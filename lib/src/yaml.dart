@@ -47,12 +47,14 @@ class Yaml {
     assets.sort((String a, String b) => a.compareTo(b));
 
     final StringBuffer pubspecSb = StringBuffer();
-    pubspecSb.write(assetsStart);
-    pubspecSb.write(license);
-    for (final String asset in assets) {
-      pubspecSb.write('   - $asset\n');
+    if (assets.isNotEmpty) {
+      pubspecSb.write(assetsStart);
+      pubspecSb.write(license);
+      for (final String asset in assets) {
+        pubspecSb.write('   - $asset\n');
+      }
+      pubspecSb.write(assetsEnd);
     }
-    pubspecSb.write(assetsEnd);
 
     final String newAssets = pubspecSb.toString();
 
@@ -109,6 +111,10 @@ class Yaml {
         yamlString =
             yamlString.replaceRange(end, end, 'flutter:\n  assets:$newAssets');
       }
+    }
+
+    if (assets.isEmpty) {
+      yamlString = yamlString.replaceAll('assets:', '');
     }
 
     yamlFile.writeAsStringSync(yamlString);
