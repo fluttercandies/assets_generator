@@ -1,3 +1,7 @@
+## 2.0.7
+
+* Fix indent in yaml
+
 ## 2.0.6
 
 * Delete consts file and clean yaml when assets are empty
