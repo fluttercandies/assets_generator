@@ -1,3 +1,7 @@
+## 2.0.8
+
+* Format yaml
+
 ## 2.0.7
 
 * Fix indent in yaml
