@@ -1,3 +1,7 @@
+## 2.0.9
+
+* Take care of empty assets
+
 ## 2.0.8
 
 * Format yaml

@@ -91,7 +91,9 @@ class Yaml {
     if (start > -1 && end > -1) {
       yamlString = yamlString.replaceRange(start, end + endLength, newAssets);
     } else {
-      final String assetsNodeS = indent + 'assets:\n' + newAssets;
+      final String assetsNodeS =
+          assets.isEmpty ? '' : '\n' + indent + 'assets:\n' + newAssets;
+
       if (yaml.containsKey('flutter')) {
         final YamlMap flutter = yaml['flutter'] as YamlMap;
         if (flutter != null) {
@@ -109,33 +111,33 @@ class Yaml {
               yamlString = yamlString.replaceRange(
                 start,
                 end,
-                assetsNodeS,
+                assets.isEmpty ? '' : indent + 'assets:\n' + newAssets,
               );
             }
             //Empty assets
             else {
-              yamlString = yamlString.replaceRange(start,
-                  sourceSpan.end.offset + ':'.length, '\n' + assetsNodeS);
+              yamlString = yamlString.replaceRange(
+                  start, sourceSpan.end.offset + ':'.length, assetsNodeS);
             }
           }
           //miss assets:
           else {
             final int end = flutter.span.end.offset;
-            yamlString = yamlString.replaceRange(end, end, '\n' + assetsNodeS);
+            yamlString = yamlString.replaceRange(end, end, assetsNodeS);
           }
         }
         //Empty flutter
         else {
           final int end =
               yamlString.lastIndexOf('flutter:') + 'flutter:'.length;
-          yamlString = yamlString.replaceRange(end, end, '\n' + assetsNodeS);
+          yamlString = yamlString.replaceRange(end, end, assetsNodeS);
         }
       }
       //miss flutter:
       else {
         final int end = yaml.span.end.offset;
         yamlString =
-            yamlString.replaceRange(end, end, '\nflutter:\n$assetsNodeS');
+            yamlString.replaceRange(end, end, '\nflutter:$assetsNodeS');
       }
     }
 
