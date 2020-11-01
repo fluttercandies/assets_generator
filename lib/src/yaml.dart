@@ -17,8 +17,8 @@ const String license = '''
 
 ''';
 
-const String assetsStartConst = '# assets start';
-const String assetsEndConst = '# assets end';
+const String assetsStart = '# assets start';
+const String assetsEnd = '# assets end';
 const String space = ' ';
 
 class Yaml {
@@ -56,43 +56,37 @@ class Yaml {
 
     String yamlString = yamlFile.readAsStringSync();
 
-    //make sure that there are no '# assets start' and '# assets end'
-    // yamlString = yamlString
-    //     .replaceAll(assetsStartConst, '')
-    //     .replaceAll(assetsEndConst, '')
-    //     .trim();
-
     final YamlMap yaml = loadYaml(yamlString) as YamlMap;
 
     final String indent = getIndent(yaml);
 
-    final String assetsStart = '\n$indent$assetsStartConst\n';
-    final String assetsEnd = '\n$indent$assetsEndConst\n';
     final StringBuffer pubspecSb = StringBuffer();
     if (assets.isNotEmpty) {
-      pubspecSb.write(assetsStart);
+      pubspecSb.write('$indent$assetsStart\n');
       pubspecSb.write(license.replaceAll('{0}', indent));
       for (final String asset in assets) {
         pubspecSb.write('${indent * 2}- $asset\n');
       }
-      pubspecSb.write(assetsEnd);
+      pubspecSb.write('\n$indent$assetsEnd');
     }
 
     final String newAssets = pubspecSb.toString();
 
-    final int start = yamlString.indexOf(assetsStart);
-    int end = yamlString.indexOf(assetsEnd);
-    int endLength = assetsEnd.length;
-    //may be it's trim
-    if (end < 0) {
-      end = yamlString.indexOf(assetsEndConst);
-      endLength = assetsEndConst.length;
+    int start = yamlString.indexOf(assetsStart);
+    if (start > -1) {
+      final List<String> lines = yamlString.split('\n');
+      final String line = lines
+          .firstWhere((String element) => element.contains(assetsStart));
+      start = yamlString.indexOf(line);
     }
+    final int end = yamlString.indexOf(assetsEnd);
+
     if (start > -1 && end > -1) {
-      yamlString = yamlString.replaceRange(start, end + endLength, newAssets);
+      yamlString = yamlString.replaceRange(
+          start, end + assetsEnd.length, newAssets);
     } else {
       final String assetsNodeS =
-          assets.isEmpty ? '' : '\n' + indent + 'assets:\n' + newAssets;
+          assets.isEmpty ? '' : '\n' + indent + 'assets:\n\n' + newAssets;
 
       if (yaml.containsKey('flutter')) {
         final YamlMap flutter = yaml['flutter'] as YamlMap;
@@ -111,7 +105,7 @@ class Yaml {
               yamlString = yamlString.replaceRange(
                 start,
                 end,
-                assets.isEmpty ? '' : indent + 'assets:\n' + newAssets,
+                assets.isEmpty ? '' : indent + 'assets:\n\n' + newAssets,
               );
             }
             //Empty assets

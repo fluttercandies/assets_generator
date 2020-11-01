@@ -1,3 +1,7 @@
+## 2.1.1
+
+* Fix '# assets start' position
+
 ## 2.1.0
 
 * Add '--const-ignore' command
