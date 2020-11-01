@@ -1,12 +1,11 @@
 import 'arg.dart';
-import 'arg_parser.dart';
 
-class Type extends Argument {
+class Type extends Argument<String> {
   @override
   String get abbr => 't';
 
   @override
-  dynamic get defaultsTo => 'd';
+  String get defaultsTo => 'd';
 
   @override
   String get help =>
@@ -14,14 +13,6 @@ class Type extends Argument {
 
   @override
   String get name => 'type';
-
-  @override
-  String get value {
-    if (argResults.wasParsed(name)) {
-      return argResults[name] as String;
-    }
-    return defaultsTo as String;
-  }
 
   FormatType type(String value) {
     if (value == 'f') {

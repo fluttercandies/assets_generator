@@ -7,7 +7,7 @@ import 'package:path/path.dart';
 
 const String argumentsFile = 'assets_generator_arguments';
 const String debugArguments =
-    '-p /Users/zmtzawqlp/Documents/github/assets_generator/example -t f';
+    '-p E:/Flutter/FlutterCandies/assets_generator/example -t f --const-ignore .md';
 // /Users/zmtzawqlp/Documents/github/assets_generator/example
 // E:/Flutter/FlutterCandies/assets_generator/example
 Future<void> main(List<String> arguments) async {
@@ -33,6 +33,7 @@ Future<void> main(List<String> arguments) async {
   final Output output = Output();
   final Rule rule = Rule();
   final Class class1 = Class();
+  final ConstIgnore constIgnore = ConstIgnore();
   parseArgs(arguments);
   if (arguments.isEmpty || help.value) {
     print(green.wrap(parser.usage));
@@ -42,6 +43,9 @@ Future<void> main(List<String> arguments) async {
   final PackageGraph packageGraph = await PackageGraph.forPath(path.value);
 
   final bool isWatch = watch.value;
+
+  final RegExp regExp =
+      constIgnore.value != null ? RegExp(constIgnore.value) : null;
 
   print('generate assets start');
   if (packageGraph != null) {
@@ -59,6 +63,7 @@ Future<void> main(List<String> arguments) async {
         output: output.value,
         rule: rule,
         class1: class1,
+        constIgnore: regExp,
       ).go();
     }
   }

@@ -25,7 +25,7 @@ Languages: [English](README.md) | 中文简体
 ###  环境准备
 
 把 pub bin 的路径放到你的系统路径中。
-	
+
 | Platform       |     Cache  location     |
 | -------------- | :---------------------: |
 | macOS or Linux |  $HOME/.pub-cache/bin   |
@@ -40,12 +40,12 @@ Languages: [English](README.md) | 中文简体
 ### 操作命令
 
 #### 帮助命令
- 
-`agen -h` 
- 
+
+`agen -h`
+
  #### 生成命令的例子
 
-`agen -t d -s -r lwu` 
+`agen -t d -s -r lwu`
 
 #### 全部命令
 
@@ -58,21 +58,22 @@ Languages: [English](README.md) | 中文简体
 -w, --[no-]watch    是否继续监听 assets 的变化
                     (默认 开启)
 -t, --type          pubsepec.yaml 生成配置的类型
-                    "d" 代表以文件夹方式生成 "- assets/images/" 
-                    "f" 代表以文件方式生成   "- assets/images/xxx.jpg" 
+                    "d" 代表以文件夹方式生成 "- assets/images/"
+                    "f" 代表以文件方式生成   "- assets/images/xxx.jpg"
                     (默认 "d")
 -s, --[no-]save     是否保存命令到本地
                     如果执行 "agen" 不带任何命令，将优先使用本地的命令进行执行
 -o, --out           const 类放置的位置
                     (默认放置在 "lib" 下面)
 -r, --rule          consts 的名字的命名规范
-                    "lwu"(小写带下划线) : "assets_images_xxx_jpg" 
-                    "uwu"(大写带下划线) : "ASSETS_IMAGES_XXX_JPG" 
-                    "lcc"(小驼峰)      : "assetsImagesXxxJpg" 
+                    "lwu"(小写带下划线) : "assets_images_xxx_jpg"
+                    "uwu"(大写带下划线) : "ASSETS_IMAGES_XXX_JPG"
+                    "lcc"(小驼峰)      : "assetsImagesXxxJpg"
                     (默认 "lwu")
 -c, --class         const 类的名字
                     (默认 "Assets")
-```                    
+    --const-ignore  使用正则表达式忽略一些const(不是全部const都希望生成)
+```
 
 ### Dart
 
@@ -80,7 +81,7 @@ Languages: [English](README.md) | 中文简体
 
 ``` dart
     Image.asset(Assets.assets_images_xxx_jpg);
-```  
+```
 
 #### 在模块中使用
 
@@ -89,4 +90,4 @@ Languages: [English](README.md) | 中文简体
       Assets.assets_images_xxx_jpg,
       package: Assets.package,
     );
-```  
+```

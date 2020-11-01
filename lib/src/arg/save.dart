@@ -1,12 +1,11 @@
 import 'arg.dart';
-import 'arg_parser.dart';
 
-class Save extends Argument {
+class Save extends Argument<bool> {
   @override
   String get abbr => 's';
 
   @override
-  dynamic get defaultsTo => false;
+  bool get defaultsTo => false;
 
   @override
   String get help =>
@@ -14,12 +13,4 @@ class Save extends Argument {
 
   @override
   String get name => 'save';
-
-  @override
-  bool get value {
-    if (argResults.wasParsed(name)) {
-      return argResults[name] as bool;
-    }
-    return defaultsTo as bool;
-  }
 }

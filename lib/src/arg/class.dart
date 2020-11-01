@@ -1,26 +1,17 @@
 import 'arg.dart';
-import 'arg_parser.dart';
 
-class Class extends Argument {
+class Class extends Argument<String> {
   @override
   String get abbr => 'c';
 
   @override
-  dynamic get defaultsTo => 'Assets';
+  String get defaultsTo => 'Assets';
 
   @override
   String get help => 'The name of const Class';
 
   @override
   String get name => 'class';
-
-  @override
-  String get value {
-    if (argResults.wasParsed(name)) {
-      return argResults[name] as String;
-    }
-    return defaultsTo as String;
-  }
 
   String go(String rule) {
     String input = value;

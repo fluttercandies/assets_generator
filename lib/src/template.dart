@@ -16,11 +16,13 @@ class Template {
     this.packageGraph,
     this.rule,
     this.class1,
+    this.constIgnore,
   );
   final PackageNode packageGraph;
   final List<String> assets;
   final Rule rule;
   final Class class1;
+  final RegExp constIgnore;
 
   @override
   String toString() {
@@ -35,6 +37,9 @@ class Template {
     }
 
     for (final String asset in assets) {
+      if (constIgnore != null && constIgnore.hasMatch(asset)) {
+        continue;
+      }
       sb.write(formatFiled(asset));
     }
 

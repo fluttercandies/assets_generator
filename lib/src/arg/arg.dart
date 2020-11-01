@@ -1,14 +1,14 @@
 import 'arg_parser.dart';
 
-abstract class Argument {
+abstract class Argument<T> {
   Argument() {
-    if (defaultsTo is bool) {
+    if (false is T) {
       parser.addFlag(name,
           abbr: abbr, help: help, defaultsTo: defaultsTo as bool);
-    } else if (defaultsTo is String) {
+    } else if ('' is T) {
       parser.addOption(name,
           abbr: abbr, help: help, defaultsTo: defaultsTo as String);
-    } else if (defaultsTo is List<String>) {
+    } else if (<String>[] is T) {
       parser.addMultiOption(
         name,
         abbr: abbr,
@@ -34,8 +34,13 @@ abstract class Argument {
   String get help;
 
   /// The value this option will have if the user doesn't explicitly pass it in
-  dynamic get defaultsTo;
+  T get defaultsTo;
 
   /// The value this option
-  dynamic get value;
+  T get value {
+    if (argResults.wasParsed(name)) {
+      return argResults[name] as T;
+    }
+    return defaultsTo;
+  }
 }

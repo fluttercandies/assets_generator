@@ -1,12 +1,11 @@
 import 'arg.dart';
-import 'arg_parser.dart';
 
-class Rule extends Argument {
+class Rule extends Argument<String> {
   @override
   String get abbr => 'r';
 
   @override
-  dynamic get defaultsTo => 'lwu';
+  String get defaultsTo => 'lwu';
 
   @override
   String get help =>
@@ -14,15 +13,6 @@ class Rule extends Argument {
 
   @override
   String get name => 'rule';
-
-  @override
-  String get value {
-    if (argResults.wasParsed(name)) {
-      return argResults[name] as String;
-    }
-
-    return defaultsTo as String;
-  }
 
   String go(String input) {
     //uppercase_with_underscores

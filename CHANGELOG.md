@@ -1,3 +1,7 @@
+## 2.1.0
+
+* Add '--const-ignore' command
+
 ## 2.0.9
 
 * Take care of empty assets

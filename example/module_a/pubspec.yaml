@@ -34,5 +34,9 @@ flutter:
     - assets/abc.txt
     - assets/images/flutter_candies_logo.png
     - assets/images/test.txt
+    - assets/xxx.md
+
+  # assets end
+
 
   # assets end

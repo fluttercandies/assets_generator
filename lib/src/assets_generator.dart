@@ -19,6 +19,7 @@ class Generator {
     this.output = 'lib',
     this.rule,
     this.class1,
+    this.constIgnore,
   });
 
   final PackageNode packageGraph;
@@ -28,6 +29,7 @@ class Generator {
   final String output;
   final Rule rule;
   final Class class1;
+  final RegExp constIgnore;
 
   void go() {
     if (watch) {
@@ -114,6 +116,7 @@ class Generator {
           packageGraph,
           rule,
           class1,
+          constIgnore,
         ).toString(),
       ),
     );

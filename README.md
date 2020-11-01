@@ -25,7 +25,7 @@ Languages: English | [中文简体](README-ZH.md)
 ### Environment
 
 you need to add pub bin path into your system path.
-	
+
 | Platform       |     Cache  location     |
 | -------------- | :---------------------: |
 | macOS or Linux |  $HOME/.pub-cache/bin   |
@@ -41,37 +41,38 @@ you need to add pub bin path into your system path.
 
 #### Help
 
-`agen -h` 
+`agen -h`
 
 #### Demo
 
-`agen -t d -s -r lwu` 
+`agen -t d -s -r lwu`
 
 #### All Commands
 
 ``` markdown
--h, --[no-]help     Help usage
--p, --path          Flutter project root path
-                    (defaults to ".")
--f, --folder        The root folder of assets
-                    (defaults to "assets")
--w, --[no-]watch    Whether continue to monitor the changes of assets
-                    (defaults to on)
--t, --type          The type in pubsepec.yaml 
-                    "d" means directory "- assets/images/" 
-                    "f" means file      "- assets/images/xxx.jpg" 
-                    (defaults to "d")
--s, --[no-]save     Whether save the arguments into the local
-                    It will execute the local arguments if run "agen" without any arguments
--o, --out           The path of const Class
-                    (defaults to "lib")
--r, --rule          The rule for the names of assets' consts
-                    "lwu"(lowercase_with_underscores) : "assets_images_xxx_jpg" 
-                    "uwu"(uppercase_with_underscores) : "ASSETS_IMAGES_XXX_JPG" 
-                    "lcc"(lowerCamelCase)             : "assetsImagesXxxJpg" 
-                    (defaults to "lwu")
--c, --class         The name of const Class
-                    (defaults to "Assets")
+-h, --[no-]help       Help usage
+-p, --path            Flutter project root path
+                      (defaults to ".")
+-f, --folder          The root folder of assets
+                      (defaults to "assets")
+-w, --[no-]watch      Whether continue to monitor the changes of assets
+                      (defaults to on)
+-t, --type            The type in pubsepec.yaml
+                      "d" means directory "- assets/images/"
+                      "f" means file      "- assets/images/xxx.jpg"
+                      (defaults to "d")
+-s, --[no-]save       Whether save the arguments into the local
+                      It will execute the local arguments if run "agen" without any arguments
+-o, --out             The path of const Class
+                      (defaults to "lib")
+-r, --rule            The rule for the names of assets' consts
+                      "lwu"(lowercase_with_underscores) : "assets_images_xxx_jpg"
+                      "uwu"(uppercase_with_underscores) : "ASSETS_IMAGES_XXX_JPG"
+                      "lcc"(lowerCamelCase)             : "assetsImagesXxxJpg"
+                      (defaults to "lwu")
+-c, --class           The name of const Class
+                      (defaults to "Assets")
+    --const-ignore    The regular to ignore some consts
 ```
 
 ### Dart
