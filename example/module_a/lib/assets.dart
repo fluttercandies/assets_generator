@@ -12,6 +12,4 @@ class Assets {
       'assets/images/flutter_candies_logo.png';
 
   static const String assets_images_test_txt = 'assets/images/test.txt';
-
-  static const String assets_xxx_md = 'assets/xxx.md';
 }

@@ -1,3 +1,7 @@
+## 2.1.2
+
+* Fix --no-watch not working
+  
 ## 2.1.1
 
 * Fix '# assets start' position

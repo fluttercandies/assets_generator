@@ -37,6 +37,8 @@ class Generator {
         _go();
       });
       watcher.startWatch();
+    } else {
+      _go();
     }
   }
 

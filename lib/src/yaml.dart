@@ -75,15 +75,15 @@ class Yaml {
     int start = yamlString.indexOf(assetsStart);
     if (start > -1) {
       final List<String> lines = yamlString.split('\n');
-      final String line = lines
-          .firstWhere((String element) => element.contains(assetsStart));
+      final String line =
+          lines.firstWhere((String element) => element.contains(assetsStart));
       start = yamlString.indexOf(line);
     }
     final int end = yamlString.indexOf(assetsEnd);
 
     if (start > -1 && end > -1) {
-      yamlString = yamlString.replaceRange(
-          start, end + assetsEnd.length, newAssets);
+      yamlString =
+          yamlString.replaceRange(start, end + assetsEnd.length, newAssets);
     } else {
       final String assetsNodeS =
           assets.isEmpty ? '' : '\n' + indent + 'assets:\n\n' + newAssets;

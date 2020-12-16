@@ -6,8 +6,7 @@ import 'package:io/ansi.dart';
 import 'package:path/path.dart';
 
 const String argumentsFile = 'assets_generator_arguments';
-const String debugArguments =
-    '-p example/ -t f --const-ignore .md';
+const String debugArguments = '-p example/ -t f --const-ignore .md';
 Future<void> main(List<String> arguments) async {
   //arguments = debugArguments.split(' ');
   //regExpTest();
