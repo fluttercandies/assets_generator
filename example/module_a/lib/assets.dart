@@ -12,4 +12,13 @@ class Assets {
       'assets/images/flutter_candies_logo.png';
 
   static const String assets_images_test_txt = 'assets/images/test.txt';
+
+  static const String assets_xxx_md = 'assets/xxx.md';
 }
+
+final List<String> assetsArray = <String>[
+  Assets.assets_abc_txt,
+  Assets.assets_images_flutter_candies_logo_png,
+  Assets.assets_images_test_txt,
+  Assets.assets_xxx_md,
+];

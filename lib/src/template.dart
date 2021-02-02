@@ -9,6 +9,11 @@ const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 
 String get classDeclare => 'class {0} {\n const {0}._();';
 String get classDeclareFooter => '}\n';
+String get constsArray => '''
+final List<String> {0} = <String>[
+{1}
+];
+''';
 
 class Template {
   Template(
@@ -17,20 +22,26 @@ class Template {
     this.rule,
     this.class1,
     this.constIgnore,
+    this.constArray,
   );
   final PackageNode packageGraph;
   final List<String> assets;
   final Rule rule;
   final Class class1;
   final RegExp constIgnore;
-
+  final bool constArray;
   @override
   String toString() {
     final StringBuffer sb = StringBuffer();
     sb.write(license);
+
+    final StringBuffer arraySb = StringBuffer();
+
+    final String className = class1.go('ucc');
+
     sb.write(classDeclare.replaceAll(
       '{0}',
-      class1.go('ucc'),
+      className,
     ));
     if (!packageGraph.isRoot) {
       sb.write('''\nstatic const String package = '${packageGraph.name}';\n''');
@@ -41,9 +52,21 @@ class Template {
         continue;
       }
       sb.write(formatFiled(asset));
+      if (constArray) {
+        arraySb.write(className + '.' + _formatFiledName(asset) + ',');
+      }
     }
 
     sb.write(classDeclareFooter);
+
+    if (arraySb.isNotEmpty) {
+      sb.write(constsArray
+          .replaceAll(
+            '{0}',
+            class1.go('lcc') + 'Array',
+          )
+          .replaceAll('{1}', arraySb.toString()));
+    }
 
     return sb.toString();
   }

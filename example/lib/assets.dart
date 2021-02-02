@@ -11,3 +11,9 @@ class Assets {
 
   static const String assets_test_txt = 'assets/test.txt';
 }
+
+final List<String> assetsArray = <String>[
+  Assets.assets_dd_txt,
+  Assets.assets_images_flutter_candies_logo_png,
+  Assets.assets_test_txt,
+];

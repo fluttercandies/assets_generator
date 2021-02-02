@@ -26,6 +26,17 @@ class Class extends Argument<String> {
         input = input.toUpperCase();
       }
     }
+    //lowercaseCamelCase
+    else if (rule == 'lcc') {
+      if (input.length > 1) {
+        input = input[0].toLowerCase() + input.substring(1);
+        input = input.replaceAllMapped(RegExp(r'_([A-z])'), (Match match) {
+          return match.group(0).replaceAll('_', '').toUpperCase();
+        }).replaceAll('_', '');
+      } else {
+        input = input.toLowerCase();
+      }
+    }
     //lowercase_with_underscores
     else if (rule == 'lwu') {
       if (input.length > 1) {

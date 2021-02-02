@@ -20,6 +20,7 @@ class Generator {
     this.rule,
     this.class1,
     this.constIgnore,
+    this.constArray = false,
   });
 
   final PackageNode packageGraph;
@@ -30,6 +31,7 @@ class Generator {
   final Rule rule;
   final Class class1;
   final RegExp constIgnore;
+  final bool constArray;
 
   void go() {
     if (watch) {
@@ -119,6 +121,7 @@ class Generator {
           rule,
           class1,
           constIgnore,
+          constArray,
         ).toString(),
       ),
     );

@@ -1,3 +1,7 @@
+## 2.2.0
+
+* Add '--const-array' command
+  
 ## 2.1.2
 
 * Fix --no-watch not working

@@ -3,6 +3,7 @@ library assets_generator;
 export 'src/arg/arg.dart';
 export 'src/arg/arg_parser.dart';
 export 'src/arg/class.dart';
+export 'src/arg/const_array.dart';
 export 'src/arg/const_ignore.dart';
 export 'src/arg/folder.dart';
 export 'src/arg/help.dart';

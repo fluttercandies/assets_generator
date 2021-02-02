@@ -1,1 +1,1 @@
--s -t f
+-s -t f --const-array

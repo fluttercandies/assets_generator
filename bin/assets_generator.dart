@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:assets_generator/src/arg/class.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:assets_generator/assets_generator.dart';
 import 'package:io/ansi.dart';
@@ -30,6 +29,7 @@ Future<void> main(List<String> arguments) async {
   final Rule rule = Rule();
   final Class class1 = Class();
   final ConstIgnore constIgnore = ConstIgnore();
+  final ConstArray constArray = ConstArray();
   parseArgs(arguments);
   if (arguments.isEmpty || help.value) {
     print(green.wrap(parser.usage));
@@ -60,6 +60,7 @@ Future<void> main(List<String> arguments) async {
         rule: rule,
         class1: class1,
         constIgnore: regExp,
+        constArray: constArray.value,
       ).go();
     }
   }
