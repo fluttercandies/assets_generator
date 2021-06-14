@@ -6,6 +6,7 @@ export 'src/arg/class.dart';
 export 'src/arg/const_array.dart';
 export 'src/arg/const_ignore.dart';
 export 'src/arg/folder.dart';
+export 'src/arg/folder_ignore.dart';
 export 'src/arg/help.dart';
 export 'src/arg/output.dart';
 export 'src/arg/path.dart';

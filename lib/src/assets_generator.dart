@@ -21,6 +21,7 @@ class Generator {
     this.class1,
     this.constIgnore,
     this.constArray = false,
+    this.folderIgnore,
   });
 
   final PackageNode packageGraph;
@@ -32,6 +33,7 @@ class Generator {
   final Class class1;
   final RegExp constIgnore;
   final bool constArray;
+  final RegExp folderIgnore;
 
   void go() {
     if (watch) {
@@ -81,7 +83,9 @@ class Generator {
 
     for (final FileSystemEntity item in directory.listSync()) {
       final FileStat fileStat = item.statSync();
-      if (fileStat.type == FileSystemEntityType.directory) {
+      if (folderIgnore != null && folderIgnore.hasMatch(item.path)) {
+        continue;
+      } else if (fileStat.type == FileSystemEntityType.directory) {
         findAssets(
           Directory(item.path),
           assets,

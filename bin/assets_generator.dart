@@ -30,6 +30,7 @@ Future<void> main(List<String> arguments) async {
   final Class class1 = Class();
   final ConstIgnore constIgnore = ConstIgnore();
   final ConstArray constArray = ConstArray();
+  final FolderIgnore folderIgnore = FolderIgnore();
   parseArgs(arguments);
   if (arguments.isEmpty || help.value) {
     print(green.wrap(parser.usage));
@@ -39,9 +40,6 @@ Future<void> main(List<String> arguments) async {
   final PackageGraph packageGraph = await PackageGraph.forPath(path.value);
 
   final bool isWatch = watch.value;
-
-  final RegExp regExp =
-      constIgnore.value != null ? RegExp(constIgnore.value) : null;
 
   print('generate assets start');
   if (packageGraph != null) {
@@ -59,8 +57,11 @@ Future<void> main(List<String> arguments) async {
         output: output.value,
         rule: rule,
         class1: class1,
-        constIgnore: regExp,
+        constIgnore:
+            constIgnore.value != null ? RegExp(constIgnore.value) : null,
         constArray: constArray.value,
+        folderIgnore:
+            folderIgnore.value != null ? RegExp(folderIgnore.value) : null,
       ).go();
     }
   }
