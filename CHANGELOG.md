@@ -1,3 +1,7 @@
+## 2.3.0
+
+* Add '--folder-array' command
+
 ## 2.2.0
 
 * Add '--const-array' command
