@@ -22,7 +22,7 @@ class Rule extends Argument<String> {
     //lowerCamelCase
     else if (value == 'lcc') {
       return input.replaceAllMapped(RegExp(r'_([A-z])'), (Match match) {
-        return match.group(0).replaceAll('_', '').toUpperCase();
+        return match.group(0)!.replaceAll('_', '').toUpperCase();
       }).replaceAll('_', '');
     }
     //lowercase_with_underscores
@@ -56,7 +56,7 @@ void regExpTest() {
 
   final String newString =
       string.replaceAllMapped(RegExp('([a-z])([A-Z])'), (Match match) {
-    return match.group(0)[0] + '_' + match.group(0)[1].toLowerCase();
+    return match.group(0)![0] + '_' + match.group(0)![1].toLowerCase();
   });
 
   // assets_images_xxx_jpg

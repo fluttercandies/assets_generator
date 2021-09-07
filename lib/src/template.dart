@@ -24,12 +24,12 @@ class Template {
     this.constIgnore,
     this.constArray,
   );
-  final PackageNode packageGraph;
+  final PackageNode? packageGraph;
   final List<String> assets;
-  final Rule rule;
-  final Class class1;
-  final RegExp constIgnore;
-  final bool constArray;
+  final Rule? rule;
+  final Class? class1;
+  final RegExp? constIgnore;
+  final bool? constArray;
   @override
   String toString() {
     final StringBuffer sb = StringBuffer();
@@ -37,22 +37,23 @@ class Template {
 
     final StringBuffer arraySb = StringBuffer();
 
-    final String className = class1.go('ucc');
+    final String className = class1!.go('ucc')!;
 
     sb.write(classDeclare.replaceAll(
       '{0}',
       className,
     ));
-    if (!packageGraph.isRoot) {
-      sb.write('''\nstatic const String package = '${packageGraph.name}';\n''');
+    if (!packageGraph!.isRoot) {
+      sb.write(
+          '''\nstatic const String package = '${packageGraph!.name}';\n''');
     }
 
     for (final String asset in assets) {
-      if (constIgnore != null && constIgnore.hasMatch(asset)) {
+      if (constIgnore != null && constIgnore!.hasMatch(asset)) {
         continue;
       }
       sb.write(formatFiled(asset));
-      if (constArray) {
+      if (constArray!) {
         arraySb.write(className + '.' + _formatFiledName(asset) + ',');
       }
     }
@@ -63,7 +64,7 @@ class Template {
       sb.write(constsArray
           .replaceAll(
             '{0}',
-            class1.go('lcc') + 'Array',
+            class1!.go('lcc')! + 'Array',
           )
           .replaceAll('{1}', arraySb.toString()));
     }
@@ -82,6 +83,6 @@ class Template {
         .replaceAll(' ', '_')
         .replaceAll('-', '_')
         .replaceAll('@', '_AT_');
-    return rule.go(path);
+    return rule!.go(path);
   }
 }

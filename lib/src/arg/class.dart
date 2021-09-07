@@ -13,14 +13,14 @@ class Class extends Argument<String> {
   @override
   String get name => 'class';
 
-  String go(String rule) {
-    String input = value;
+  String? go(String rule) {
+    String? input = value;
     //upperCamelCase
     if (rule == 'ucc') {
-      if (input.length > 1) {
+      if (input!.length > 1) {
         input = input[0].toUpperCase() + input.substring(1);
         input = input.replaceAllMapped(RegExp(r'_([A-z])'), (Match match) {
-          return match.group(0).replaceAll('_', '').toUpperCase();
+          return match.group(0)!.replaceAll('_', '').toUpperCase();
         }).replaceAll('_', '');
       } else {
         input = input.toUpperCase();
@@ -28,10 +28,10 @@ class Class extends Argument<String> {
     }
     //lowercaseCamelCase
     else if (rule == 'lcc') {
-      if (input.length > 1) {
+      if (input!.length > 1) {
         input = input[0].toLowerCase() + input.substring(1);
         input = input.replaceAllMapped(RegExp(r'_([A-z])'), (Match match) {
-          return match.group(0).replaceAll('_', '').toUpperCase();
+          return match.group(0)!.replaceAll('_', '').toUpperCase();
         }).replaceAll('_', '');
       } else {
         input = input.toLowerCase();
@@ -39,10 +39,10 @@ class Class extends Argument<String> {
     }
     //lowercase_with_underscores
     else if (rule == 'lwu') {
-      if (input.length > 1) {
+      if (input!.length > 1) {
         input = input[0].toLowerCase() + input.substring(1);
         input = input.replaceAllMapped(RegExp('([a-z])([A-Z])'), (Match match) {
-          return match.group(0)[0] + '_' + match.group(0)[1].toLowerCase();
+          return match.group(0)![0] + '_' + match.group(0)![1].toLowerCase();
         });
       } else {
         input = input.toLowerCase();

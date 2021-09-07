@@ -28,7 +28,7 @@ abstract class Argument<T> {
   ///
   /// For example, `abbr: "a"` will allow the user to pass `-a value` or
   /// `-avalue`.
-  String get abbr;
+  String? get abbr;
 
   /// A description of this option.
   String get help;
@@ -37,9 +37,9 @@ abstract class Argument<T> {
   T get defaultsTo;
 
   /// The value this option
-  T get value {
-    if (argResults.wasParsed(name)) {
-      return argResults[name] as T;
+  T? get value {
+    if (argResults!.wasParsed(name)) {
+      return argResults![name] as T?;
     }
     return defaultsTo;
   }

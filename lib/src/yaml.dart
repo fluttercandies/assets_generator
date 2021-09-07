@@ -89,14 +89,14 @@ class Yaml {
           assets.isEmpty ? '' : '\n' + indent + 'assets:\n\n' + newAssets;
 
       if (yaml.containsKey('flutter')) {
-        final YamlMap flutter = yaml['flutter'] as YamlMap;
+        final YamlMap? flutter = yaml['flutter'] as YamlMap?;
         if (flutter != null) {
           if (flutter.containsKey('assets')) {
-            final YamlList assetsNode = flutter['assets'] as YamlList;
+            final YamlList? assetsNode = flutter['assets'] as YamlList?;
             final FileSpan sourceSpan = (flutter.nodes.keys.firstWhere(
                     (dynamic element) =>
                         element is YamlNode &&
-                        element.span.text == 'assets') as YamlNode)
+                        element.span.text == 'assets') as YamlNode?)
                 ?.span as FileSpan;
 
             final int start = sourceSpan.start.offset - sourceSpan.start.column;
@@ -149,7 +149,7 @@ class Yaml {
 
 String getIndent(YamlMap yamlMap) {
   if (yamlMap.containsKey('flutter')) {
-    final YamlMap flutter = yamlMap['flutter'] as YamlMap;
+    final YamlMap? flutter = yamlMap['flutter'] as YamlMap?;
     if (flutter != null && flutter.nodes.keys.first is YamlNode) {
       final SourceSpan sourceSpan = flutter.nodes.keys.first.span as SourceSpan;
       return space * sourceSpan.start.column;

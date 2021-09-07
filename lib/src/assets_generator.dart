@@ -24,16 +24,16 @@ class Generator {
     this.folderIgnore,
   });
 
-  final PackageNode packageGraph;
-  final String folder;
+  final PackageNode? packageGraph;
+  final String? folder;
   final FormatType formatType;
   final bool watch;
-  final String output;
-  final Rule rule;
-  final Class class1;
-  final RegExp constIgnore;
-  final bool constArray;
-  final RegExp folderIgnore;
+  final String? output;
+  final Rule? rule;
+  final Class? class1;
+  final RegExp? constIgnore;
+  final bool? constArray;
+  final RegExp? folderIgnore;
 
   void go() {
     if (watch) {
@@ -47,7 +47,7 @@ class Generator {
   }
 
   List<Directory> _go() {
-    final String path = packageGraph.path;
+    final String path = packageGraph!.path;
     final File yamlFile = File(join(path, 'pubspec.yaml'));
     if (!yamlFile.existsSync()) {
       throw Exception('$path is not a Flutter project.');
@@ -83,7 +83,7 @@ class Generator {
 
     for (final FileSystemEntity item in directory.listSync()) {
       final FileStat fileStat = item.statSync();
-      if (folderIgnore != null && folderIgnore.hasMatch(item.path)) {
+      if (folderIgnore != null && folderIgnore!.hasMatch(item.path)) {
         continue;
       } else if (fileStat.type == FileSystemEntityType.directory) {
         findAssets(
@@ -94,7 +94,7 @@ class Generator {
       } else if (fileStat.type == FileSystemEntityType.file) {
         if (basename(item.path) != '.DS_Store') {
           assets.add(item.path
-              .replaceAll('${packageGraph.path}$separator', '')
+              .replaceAll('${packageGraph!.path}$separator', '')
               .replaceAll(separator, '/'));
         }
       }
@@ -102,8 +102,8 @@ class Generator {
   }
 
   void generateConstsFile(List<String> assets) {
-    final String path = packageGraph.path;
-    final String fileName = class1.go('lwu');
+    final String path = packageGraph!.path;
+    final String? fileName = class1!.go('lwu');
 
     final File file = File(join(path, output, '$fileName.dart'));
 

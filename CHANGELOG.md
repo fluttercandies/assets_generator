@@ -1,3 +1,7 @@
+## 3.0.0
+
+* null safety
+  
 ## 2.3.0
 
 * Add '--folder-array' command

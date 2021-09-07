@@ -14,7 +14,7 @@ class Type extends Argument<String> {
   @override
   String get name => 'type';
 
-  FormatType type(String value) {
+  FormatType type(String? value) {
     if (value == 'f') {
       return FormatType.file;
     }

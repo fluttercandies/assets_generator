@@ -20,7 +20,7 @@ class Watcher {
 
   /// when the directory is change
   /// refresh the code
-  StreamSubscription<FileSystemEvent> _watch(FileSystemEntity file) {
+  StreamSubscription<FileSystemEvent>? _watch(FileSystemEntity file) {
     if (FileSystemEntity.isWatchSupported) {
       return file.watch().listen((FileSystemEvent data) {
         if (data.isDirectory) {
@@ -28,7 +28,7 @@ class Watcher {
 
           if (data.type == FileSystemEvent.delete) {
             if (watchMap.containsKey(directory)) {
-              watchMap[watchMap].cancel();
+              watchMap[watchMap as FileSystemEntity]!.cancel();
             }
             dirList.remove(directory);
           }
@@ -42,7 +42,7 @@ class Watcher {
             dirList.add(directory);
           }
         }
-        String msg;
+        String? msg;
         switch (data.type) {
           case FileSystemEvent.create:
             msg = green.wrap('create');
@@ -62,7 +62,7 @@ class Watcher {
         }
         if (msg != null) {
           print('\n$msg ${data.path}.\n');
-          assetsChanged?.call();
+          assetsChanged.call();
         }
       });
     }
@@ -76,7 +76,7 @@ class Watcher {
     }
     _watching = true;
     for (final Directory dir in dirList) {
-      final StreamSubscription<FileSystemEvent> sub = _watch(dir);
+      final StreamSubscription<FileSystemEvent>? sub = _watch(dir);
       if (sub != null) {
         sub.onDone(sub.cancel);
       }
@@ -89,18 +89,18 @@ class Watcher {
 
   void stopWatch() {
     _watching = false;
-    for (final StreamSubscription<FileSystemEvent> v in watchMap.values) {
-      v.cancel();
+    for (final StreamSubscription<FileSystemEvent>? v in watchMap.values) {
+      v!.cancel();
     }
 
     watchMap.clear();
   }
 
-  Map<FileSystemEntity, StreamSubscription<FileSystemEvent>> watchMap =
-      <FileSystemEntity, StreamSubscription<FileSystemEvent>>{};
+  Map<FileSystemEntity, StreamSubscription<FileSystemEvent>?> watchMap =
+      <FileSystemEntity, StreamSubscription<FileSystemEvent>?>{};
 
   void removeAllWatches() {
-    for (final StreamSubscription<FileSystemEvent> sub in watchMap.values) {
+    for (final StreamSubscription<FileSystemEvent>? sub in watchMap.values) {
       sub?.cancel();
     }
   }

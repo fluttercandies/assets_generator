@@ -32,40 +32,42 @@ Future<void> main(List<String> arguments) async {
   final ConstArray constArray = ConstArray();
   final FolderIgnore folderIgnore = FolderIgnore();
   parseArgs(arguments);
-  if (arguments.isEmpty || help.value) {
+  if (arguments.isEmpty || help.value!) {
     print(green.wrap(parser.usage));
     return;
   }
 
-  final PackageGraph packageGraph = await PackageGraph.forPath(path.value);
+  final PackageGraph packageGraph = path.value != null
+      ? await PackageGraph.forPath(path.value!)
+      : await PackageGraph.forThisPackage();
 
-  final bool isWatch = watch.value;
+  final bool isWatch = watch.value!;
 
   print('generate assets start');
-  if (packageGraph != null) {
-    final PackageNode rootNode = packageGraph.root;
-    for (final PackageNode packageNode in packageGraph.allPackages.values.where(
-      (PackageNode packageGraph) =>
-          packageGraph.dependencyType == DependencyType.path &&
-          packageGraph.path.startsWith(rootNode.path),
-    )) {
-      Generator(
-        packageGraph: packageNode,
-        folder: folder.value,
-        formatType: type.type(type.value),
-        watch: isWatch,
-        output: output.value,
-        rule: rule,
-        class1: class1,
-        constIgnore:
-            constIgnore.value != null ? RegExp(constIgnore.value) : null,
-        constArray: constArray.value,
-        folderIgnore:
-            folderIgnore.value != null ? RegExp(folderIgnore.value) : null,
-      ).go();
-    }
+
+  final PackageNode rootNode = packageGraph.root;
+  for (final PackageNode packageNode in packageGraph.allPackages.values.where(
+    (PackageNode packageGraph) =>
+        packageGraph.dependencyType == DependencyType.path &&
+        packageGraph.path.startsWith(rootNode.path),
+  )) {
+    Generator(
+      packageGraph: packageNode,
+      folder: folder.value,
+      formatType: type.type(type.value),
+      watch: isWatch,
+      output: output.value,
+      rule: rule,
+      class1: class1,
+      constIgnore:
+          constIgnore.value != null ? RegExp(constIgnore.value!) : null,
+      constArray: constArray.value,
+      folderIgnore:
+          folderIgnore.value != null ? RegExp(folderIgnore.value!) : null,
+    ).go();
   }
-  if (save.value && !runFromLocal) {
+
+  if (save.value! && !runFromLocal) {
     final File file = File(join('./', argumentsFile));
     if (!file.existsSync()) {
       file.createSync();
