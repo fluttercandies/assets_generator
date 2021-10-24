@@ -1,6 +1,10 @@
+## 3.0.1
+
+* Fix null safety error
+  
 ## 3.0.0
 
-* null safety
+* Null safety
   
 ## 2.3.0
 

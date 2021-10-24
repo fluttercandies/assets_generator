@@ -4,16 +4,16 @@ abstract class Argument<T> {
   Argument() {
     if (false is T) {
       parser.addFlag(name,
-          abbr: abbr, help: help, defaultsTo: defaultsTo as bool);
+          abbr: abbr, help: help, defaultsTo: defaultsTo as bool?);
     } else if ('' is T) {
       parser.addOption(name,
-          abbr: abbr, help: help, defaultsTo: defaultsTo as String);
+          abbr: abbr, help: help, defaultsTo: defaultsTo as String?);
     } else if (<String>[] is T) {
       parser.addMultiOption(
         name,
         abbr: abbr,
         help: help,
-        defaultsTo: defaultsTo as List<String>,
+        defaultsTo: defaultsTo as List<String>?,
       );
     } else {
       // TODO(zmtzawqlp): not implement for now.
