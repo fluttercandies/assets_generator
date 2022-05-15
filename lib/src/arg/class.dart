@@ -42,7 +42,7 @@ class Class extends Argument<String> {
       if (input!.length > 1) {
         input = input[0].toLowerCase() + input.substring(1);
         input = input.replaceAllMapped(RegExp('([a-z])([A-Z])'), (Match match) {
-          return match.group(0)![0] + '_' + match.group(0)![1].toLowerCase();
+          return '${match.group(0)![0]}_${match.group(0)![1].toLowerCase()}';
         });
       } else {
         input = input.toLowerCase();

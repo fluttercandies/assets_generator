@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dart_style/dart_style.dart';
 import 'package:io/ansi.dart';
 

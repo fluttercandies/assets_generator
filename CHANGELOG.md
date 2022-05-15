@@ -1,3 +1,7 @@
+## 3.0.2
+
+* Add ignore_for_file: constant_identifier_names for generated file
+
 ## 3.0.1
 
 * Fix null safety error

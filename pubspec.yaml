@@ -1,6 +1,6 @@
 name: assets_generator
 description: The flutter tool to generate assets‘s configs(yaml) and consts automatically for single project and multiple modules.
-version: 3.0.1
+version: 3.0.2
 homepage: https://github.com/fluttercandies/assets_generator
 
 environment:
@@ -18,7 +18,12 @@ dependencies:
 
 dev_dependencies:
   pedantic: ^1.11.1
-
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.1
 executables:
   agen: assets_generator
 

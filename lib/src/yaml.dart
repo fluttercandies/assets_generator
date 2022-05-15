@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:assets_generator/assets_generator.dart';
@@ -86,7 +88,7 @@ class Yaml {
           yamlString.replaceRange(start, end + assetsEnd.length, newAssets);
     } else {
       final String assetsNodeS =
-          assets.isEmpty ? '' : '\n' + indent + 'assets:\n\n' + newAssets;
+          assets.isEmpty ? '' : '\n${indent}assets:\n\n$newAssets';
 
       if (yaml.containsKey('flutter')) {
         final YamlMap? flutter = yaml['flutter'] as YamlMap?;
@@ -105,7 +107,7 @@ class Yaml {
               yamlString = yamlString.replaceRange(
                 start,
                 end,
-                assets.isEmpty ? '' : indent + 'assets:\n\n' + newAssets,
+                assets.isEmpty ? '' : '${indent}assets:\n\n$newAssets',
               );
             }
             //Empty assets

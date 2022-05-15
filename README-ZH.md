@@ -35,7 +35,7 @@ Languages: [English](README.md) | 中文简体
 
 ### 激活 assets_generator
 
- 执行 `pub global activate assets_generator`
+ 执行 `dart pub global activate assets_generator`
 
 ### 操作命令
 

@@ -35,7 +35,7 @@ you need to add pub bin path into your system path.
 
 ### Activate assets_generator
 
- `pub global activate assets_generator`
+ `dart pub global activate assets_generator`
 
 ### Command
 

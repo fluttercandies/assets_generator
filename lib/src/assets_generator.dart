@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:assets_generator/assets_generator.dart';
 import 'package:assets_generator/src/format.dart';
@@ -5,8 +7,6 @@ import 'package:assets_generator/src/watcher.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
-import 'arg/rule.dart';
-import 'arg/type.dart';
 import 'template.dart';
 import 'yaml.dart';
 

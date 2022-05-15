@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'arg.dart';
 
 class Rule extends Argument<String> {
@@ -56,7 +58,7 @@ void regExpTest() {
 
   final String newString =
       string.replaceAllMapped(RegExp('([a-z])([A-Z])'), (Match match) {
-    return match.group(0)![0] + '_' + match.group(0)![1].toLowerCase();
+    return '${match.group(0)![0]}_${match.group(0)![1].toLowerCase()}';
   });
 
   // assets_images_xxx_jpg
