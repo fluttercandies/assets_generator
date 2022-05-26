@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:assets_generator/assets_generator.dart';
+import 'package:assets_generator/src/arg/package.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
@@ -33,6 +34,7 @@ Future<void> main(List<String> arguments) async {
   final ConstIgnore constIgnore = ConstIgnore();
   final ConstArray constArray = ConstArray();
   final FolderIgnore folderIgnore = FolderIgnore();
+  final Package package = Package();
   parseArgs(arguments);
   if (arguments.isEmpty || help.value!) {
     print(green.wrap(parser.usage));
@@ -66,6 +68,7 @@ Future<void> main(List<String> arguments) async {
       constArray: constArray.value,
       folderIgnore:
           folderIgnore.value != null ? RegExp(folderIgnore.value!) : null,
+      package: package.value ?? false,
     ).go();
   }
 

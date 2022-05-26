@@ -22,6 +22,7 @@ class Generator {
     this.constIgnore,
     this.constArray = false,
     this.folderIgnore,
+    this.package = false,
   });
 
   final PackageNode? packageGraph;
@@ -34,6 +35,7 @@ class Generator {
   final RegExp? constIgnore;
   final bool? constArray;
   final RegExp? folderIgnore;
+  final bool package;
 
   void go() {
     if (watch) {
@@ -126,6 +128,7 @@ class Generator {
           class1,
           constIgnore,
           constArray,
+          package,
         ).toString(),
       ),
     );

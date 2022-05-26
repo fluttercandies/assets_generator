@@ -25,6 +25,7 @@ class Template {
     this.class1,
     this.constIgnore,
     this.constArray,
+    this.package,
   );
   final PackageNode? packageGraph;
   final List<String> assets;
@@ -32,6 +33,7 @@ class Template {
   final Class? class1;
   final RegExp? constIgnore;
   final bool? constArray;
+  final bool package;
   @override
   String toString() {
     final StringBuffer sb = StringBuffer();
@@ -45,7 +47,7 @@ class Template {
       '{0}',
       className,
     ));
-    if (!packageGraph!.isRoot) {
+    if (!packageGraph!.isRoot || package) {
       sb.write(
           '''\nstatic const String package = '${packageGraph!.name}';\n''');
     }

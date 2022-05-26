@@ -1,3 +1,7 @@
+## 3.0.3
+
+* Add '--package' command
+
 ## 3.0.2
 
 * Add ignore_for_file: constant_identifier_names for generated file
