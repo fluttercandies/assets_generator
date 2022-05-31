@@ -37,9 +37,9 @@ class Generator {
   final RegExp? folderIgnore;
   final bool package;
 
-  void go() {
+  Future<void> go() async {
     if (watch) {
-      final Watcher watcher = Watcher(_go(), () {
+      final Watcher watcher = Watcher(await _go(), () {
         _go();
       });
       watcher.startWatch();
@@ -48,7 +48,7 @@ class Generator {
     }
   }
 
-  List<Directory> _go() {
+  Future<List<Directory>> _go() async {
     final String path = packageGraph!.path;
     final File yamlFile = File(join(path, 'pubspec.yaml'));
     if (!yamlFile.existsSync()) {
@@ -65,13 +65,13 @@ class Generator {
     findAssets(assetsDirectory, assets, dirList);
 
     // resolution image assets miss main asset entry
-    final List<String> miss = checkResolutionImageAssets(assets);
+    final Map<String, String> miss = checkResolutionImageAssets(assets);
 
     assets.sort((String a, String b) => a.compareTo(b));
 
-    generateConstsFile(assets);
+    await generateConstsFile(assets, miss);
 
-    Yaml(yamlFile, assets, miss, formatType).write();
+    Yaml(yamlFile, assets, miss.keys.toList(), formatType).write();
 
     return dirList;
   }
@@ -103,7 +103,10 @@ class Generator {
     }
   }
 
-  void generateConstsFile(List<String> assets) {
+  Future<void> generateConstsFile(
+    List<String> assets,
+    Map<String, String> miss,
+  ) async {
     final String path = packageGraph!.path;
     final String? fileName = class1!.go('lwu');
 
@@ -113,30 +116,49 @@ class Generator {
       file.deleteSync(recursive: true);
     }
 
+    final File previewFile = File(join(path, output, '$fileName.preview.dart'));
+    if (previewFile.existsSync()) {
+      previewFile.deleteSync(recursive: true);
+    }
+
     if (assets.isEmpty) {
       return;
     }
 
     file.createSync(recursive: true);
 
+    final Template template = Template(
+      assets,
+      packageGraph,
+      rule,
+      class1,
+      constIgnore,
+      constArray,
+      package,
+    );
     file.writeAsStringSync(
       formatDart(
-        Template(
-          assets,
-          packageGraph,
-          rule,
-          class1,
-          constIgnore,
-          constArray,
-          package,
-        ).toString(),
+        await template.generateFile(miss, previewFile),
       ),
     );
+    if (previewFile.existsSync()) {
+      final File gitIgnoreFile = File('$path/.gitignore');
+      if (!gitIgnoreFile.existsSync()) {
+        gitIgnoreFile.createSync(recursive: true);
+      }
+
+      final String line = previewFile.path.replaceAll(path, '');
+      String content = await gitIgnoreFile.readAsString();
+      if (!content.contains(line)) {
+        content += '\n$line';
+        await gitIgnoreFile.writeAsString(content);
+      }
+    }
   }
 
-  List<String> checkResolutionImageAssets(List<String> assets) {
+  Map<String, String> checkResolutionImageAssets(List<String> assets) {
     // miss main asset entry
-    final List<String> miss = <String>[];
+    final Map<String, String> miss = <String, String>{};
     if (assets.isEmpty) {
       return miss;
     }
@@ -157,7 +179,7 @@ class Generator {
           // throw Exception(red
           //     .wrap('miss main asset entry: ${packageGraph.path}$separator$r'));
           assets.add(r);
-          miss.add(r);
+          miss[r] = asset;
         }
         assets.remove(asset);
       }

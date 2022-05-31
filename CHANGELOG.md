@@ -1,3 +1,7 @@
+## 3.0.4
+
+* Support image preview
+
 ## 3.0.3
 
 * Add '--package' command

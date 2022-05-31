@@ -10,6 +10,7 @@ class Assets {
 
   static const String assets_abc_txt = 'assets/abc.txt';
 
+  /// {@macro assets_generator.assets_images_flutter_candies_logo_png.preview}
   static const String assets_images_flutter_candies_logo_png =
       'assets/images/flutter_candies_logo.png';
 
@@ -20,6 +21,8 @@ class Assets {
 
 final List<String> assetsArray = <String>[
   Assets.assets_abc_txt,
+
+  /// {@macro assets_generator.assets_images_flutter_candies_logo_png.preview}
   Assets.assets_images_flutter_candies_logo_png,
   Assets.assets_images_test_txt,
   Assets.assets_xxx_md,
