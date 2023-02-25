@@ -23,6 +23,7 @@ class Generator {
     this.constArray = false,
     this.folderIgnore,
     this.package = false,
+    this.classPrefix = false,
   });
 
   final PackageNode? packageGraph;
@@ -36,6 +37,7 @@ class Generator {
   final bool? constArray;
   final RegExp? folderIgnore;
   final bool package;
+  final bool classPrefix;
 
   Future<void> go() async {
     if (watch) {
@@ -108,7 +110,8 @@ class Generator {
     Map<String, String> miss,
   ) async {
     final String path = packageGraph!.path;
-    final String? fileName = class1!.go('lwu');
+    final String? fileName =
+        class1!.go('lwu', classPrefix ? packageGraph!.name : '');
 
     final File file = File(join(path, output, '$fileName.dart'));
 
@@ -135,6 +138,7 @@ class Generator {
       constIgnore,
       constArray,
       package,
+      classPrefix,
     );
     file.writeAsStringSync(
       formatDart(

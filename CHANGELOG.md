@@ -1,3 +1,7 @@
+## 3.0.5
+
+* add 'class-prefix', Whether use package name as prefix for the name of const Class
+
 ## 3.0.4
 
 * Support image preview

@@ -43,6 +43,7 @@ class Template {
     this.constIgnore,
     this.constArray,
     this.package,
+    this.classPrefix,
   );
   final PackageNode? packageGraph;
   final List<String> assets;
@@ -51,6 +52,7 @@ class Template {
   final RegExp? constIgnore;
   final bool? constArray;
   final bool package;
+  final bool classPrefix;
 
   Future<String> generateFile(
     Map<String, String> miss,
@@ -61,7 +63,8 @@ class Template {
 
     final StringBuffer arraySb = StringBuffer();
 
-    final String className = class1!.go('ucc')!;
+    final String className =
+        class1!.go('ucc', classPrefix ? packageGraph!.name : '')!;
 
     sb.write(classDeclare.replaceAll(
       '{0}',
@@ -106,7 +109,7 @@ class Template {
       sb.write(constsArray
           .replaceAll(
             '{0}',
-            '${class1!.go('lcc')!}Array',
+            '${class1!.go('lcc', classPrefix ? packageGraph!.name : '')!}Array',
           )
           .replaceAll('{1}', arraySb.toString()));
     }
