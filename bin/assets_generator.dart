@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:assets_generator/assets_generator.dart';
 import 'package:assets_generator/src/arg/class_prefix.dart';
+import 'package:assets_generator/src/arg/g_suffix.dart';
 import 'package:assets_generator/src/arg/package.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
@@ -37,6 +38,7 @@ Future<void> main(List<String> arguments) async {
   final FolderIgnore folderIgnore = FolderIgnore();
   final Package package = Package();
   final ClassPrefix classPrefix = ClassPrefix();
+  final GSuffix gSuffix = GSuffix();
   parseArgs(arguments);
   if (arguments.isEmpty || help.value!) {
     print(green.wrap(parser.usage));
@@ -72,6 +74,7 @@ Future<void> main(List<String> arguments) async {
           folderIgnore.value != null ? RegExp(folderIgnore.value!) : null,
       package: package.value ?? false,
       classPrefix: classPrefix.value ?? false,
+      gSuffix: gSuffix.value ?? false,
     ).go();
   }
 

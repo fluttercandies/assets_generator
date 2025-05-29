@@ -1,3 +1,7 @@
+## 3.0.6
+
+* add 'g-suffix', whether the generated file is end with .g
+
 ## 3.0.5
 
 * add 'class-prefix', Whether use package name as prefix for the name of const Class

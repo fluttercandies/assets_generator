@@ -24,6 +24,7 @@ class Generator {
     this.folderIgnore,
     this.package = false,
     this.classPrefix = false,
+    this.gSuffix = false,
   });
 
   final PackageNode? packageGraph;
@@ -38,6 +39,7 @@ class Generator {
   final RegExp? folderIgnore;
   final bool package;
   final bool classPrefix;
+  final bool gSuffix;
 
   Future<void> go() async {
     if (watch) {
@@ -110,8 +112,11 @@ class Generator {
     Map<String, String> miss,
   ) async {
     final String path = packageGraph!.path;
-    final String? fileName =
-        class1!.go('lwu', classPrefix ? packageGraph!.name : '');
+    String? fileName = class1!.go('lwu', classPrefix ? packageGraph!.name : '');
+
+    if (gSuffix) {
+      fileName = '$fileName.g';
+    }
 
     final File file = File(join(path, output, '$fileName.dart'));
 
