@@ -5,6 +5,7 @@ import 'package:assets_generator/assets_generator.dart';
 import 'package:assets_generator/src/arg/class_prefix.dart';
 import 'package:assets_generator/src/arg/g_suffix.dart';
 import 'package:assets_generator/src/arg/package.dart';
+import 'package:assets_generator/src/arg/package_ignore.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
@@ -15,6 +16,16 @@ Future<void> main(List<String> arguments) async {
   //arguments = debugArguments.split(' ');
   //regExpTest();
   bool runFromLocal = false;
+  // debug
+  // ignore: dead_code
+  if (false) {
+    final File file = File(join('example', argumentsFile));
+    if (file.existsSync()) {
+      final String content = file.readAsStringSync() + ' -p example';
+      arguments = content.split(' ');
+      runFromLocal = true;
+    }
+  }
   if (arguments.isEmpty) {
     final File file = File(join('./', argumentsFile));
     if (file.existsSync()) {
@@ -39,10 +50,16 @@ Future<void> main(List<String> arguments) async {
   final Package package = Package();
   final ClassPrefix classPrefix = ClassPrefix();
   final GSuffix gSuffix = GSuffix();
+  final PackageIgnore packageIgnore = PackageIgnore();
+
   parseArgs(arguments);
   if (arguments.isEmpty || help.value!) {
     print(green.wrap(parser.usage));
     return;
+  }
+  RegExp? folderIgnoreRegExp;
+  if (packageIgnore.value != null) {
+    folderIgnoreRegExp = RegExp(packageIgnore.value!);
   }
 
   final PackageGraph packageGraph = path.value != null
@@ -59,6 +76,10 @@ Future<void> main(List<String> arguments) async {
         packageGraph.dependencyType == DependencyType.path &&
         packageGraph.path.startsWith(rootNode.path),
   )) {
+    if (folderIgnoreRegExp != null &&
+        folderIgnoreRegExp.hasMatch(packageNode.name)) {
+      continue;
+    }
     Generator(
       packageGraph: packageNode,
       folder: folder.value,

@@ -59,8 +59,9 @@ class Generator {
       throw Exception('$path is not a Flutter project.');
     }
     final Directory assetsDirectory = Directory(join(path, folder));
-    if (!assetsDirectory.existsSync()) {
-      assetsDirectory.createSync();
+    if (!assetsDirectory.existsSync() || assetsDirectory.listSync().isEmpty) {
+      return <Directory>[];
+      //  assetsDirectory.createSync();
     }
 
     final List<Directory> dirList = <Directory>[];

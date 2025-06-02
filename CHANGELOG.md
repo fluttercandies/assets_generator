@@ -1,3 +1,7 @@
+## 3.0.7
+
+* add 'package-ignore', the regular to ignore some packages.
+
 ## 3.0.6
 
 * add 'g-suffix', whether the generated file is end with .g
