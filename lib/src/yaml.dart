@@ -137,10 +137,10 @@ class Yaml {
       }
     }
 
-    if (assets.isEmpty) {
-      //make sure that there are no 'assets:'
-      yamlString = yamlString.replaceAll('assets:', '').trim();
-    }
+    // if (assets.isEmpty) {
+    //   // make sure that there are no 'assets:'
+    //   yamlString = yamlString.replaceAll('assets:', '').trim();
+    // }
 
     yamlString = yamlString.trim();
 

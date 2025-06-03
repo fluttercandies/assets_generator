@@ -1,3 +1,7 @@
+## 3.0.8
+
+* It will not clean 'assets tag' in yaml if there are not assets.
+
 ## 3.0.7
 
 * add 'package-ignore', the regular to ignore some packages.
