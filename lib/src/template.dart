@@ -31,7 +31,7 @@ const String previewTemplate = '''/// {@macro assets_generator.{0}.preview}
 ''';
 
 const String mockClass = '''
-// ignore_for_file: camel_case_types, unused_element
+// ignore_for_file: camel_case_types, unused_element, dangling_library_doc_comments
 class _ {}''';
 
 class Template {

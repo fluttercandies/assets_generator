@@ -1,3 +1,7 @@
+## 3.0.9
+
+* ignore: dangling_library_doc_comments for preview file
+
 ## 3.0.8
 
 * It will not clean 'assets tag' in yaml if there are not assets.
