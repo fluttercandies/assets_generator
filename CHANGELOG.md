@@ -1,3 +1,7 @@
+## 3.1.0
+
+* ignore: eol_at_end_of_file for preview file
+
 ## 3.0.9
 
 * ignore: dangling_library_doc_comments for preview file
