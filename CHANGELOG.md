@@ -1,3 +1,11 @@
+## 3.3.0
+
+* add 'root-package', Specify which package should be treated as the root project (by package name) for workspace
+
+## 3.2.3
+
+* add 'use-key-name', Whether to use keyName style (packages/{package}/...) for asset paths.
+
 ## 3.1.0
 
 * ignore: eol_at_end_of_file for preview file

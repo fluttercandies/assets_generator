@@ -2,10 +2,7 @@
 
 import 'dart:io';
 import 'package:assets_generator/assets_generator.dart';
-import 'package:assets_generator/src/arg/class_prefix.dart';
-import 'package:assets_generator/src/arg/g_suffix.dart';
-import 'package:assets_generator/src/arg/package.dart';
-import 'package:assets_generator/src/arg/package_ignore.dart';
+import 'package:assets_generator/src/arg/root_package.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
@@ -22,7 +19,7 @@ Future<void> main(List<String> arguments) async {
     final File file = File(join('example', argumentsFile));
     if (file.existsSync()) {
       final String content = file.readAsStringSync() + ' -p example';
-      arguments = content.split(' ');
+      arguments = content.split(' ').map((String e) => e.trim()).toList();
       runFromLocal = true;
     }
   }
@@ -30,7 +27,7 @@ Future<void> main(List<String> arguments) async {
     final File file = File(join('./', argumentsFile));
     if (file.existsSync()) {
       final String content = file.readAsStringSync();
-      arguments = content.split(' ');
+      arguments = content.split(' ').map((String e) => e.trim()).toList();
       runFromLocal = true;
     }
   }
@@ -51,6 +48,8 @@ Future<void> main(List<String> arguments) async {
   final ClassPrefix classPrefix = ClassPrefix();
   final GSuffix gSuffix = GSuffix();
   final PackageIgnore packageIgnore = PackageIgnore();
+  final UseKeyName useKeyNameFlag = UseKeyName();
+  final RootPackage rootPackage = RootPackage();
 
   parseArgs(arguments);
   if (arguments.isEmpty || help.value!) {
@@ -94,8 +93,10 @@ Future<void> main(List<String> arguments) async {
       folderIgnore:
           folderIgnore.value != null ? RegExp(folderIgnore.value!) : null,
       package: package.value ?? false,
+      useKeyName: useKeyNameFlag.value ?? false,
       classPrefix: classPrefix.value ?? false,
       gSuffix: gSuffix.value ?? false,
+      rootPackageName: rootPackage.value,
     ).go();
   }
 

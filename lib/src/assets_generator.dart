@@ -23,8 +23,10 @@ class Generator {
     this.constArray = false,
     this.folderIgnore,
     this.package = false,
+    this.useKeyName = false,
     this.classPrefix = false,
     this.gSuffix = false,
+    this.rootPackageName,
   });
 
   final PackageNode? packageGraph;
@@ -38,8 +40,10 @@ class Generator {
   final bool? constArray;
   final RegExp? folderIgnore;
   final bool package;
+  final bool useKeyName;
   final bool classPrefix;
   final bool gSuffix;
+  final String? rootPackageName;
 
   Future<void> go() async {
     if (watch) {
@@ -144,7 +148,9 @@ class Generator {
       constIgnore,
       constArray,
       package,
+      useKeyName,
       classPrefix,
+      rootPackageName,
     );
     file.writeAsStringSync(
       formatDart(

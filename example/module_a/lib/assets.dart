@@ -6,17 +6,16 @@
 
 class Assets {
   const Assets._();
-  static const String package = 'module_a';
-
-  static const String assets_abc_txt = 'assets/abc.txt';
+  static const String assets_abc_txt = 'packages/module_a/assets/abc.txt';
 
   /// {@macro assets_generator.assets_images_flutter_candies_logo_png.preview}
   static const String assets_images_flutter_candies_logo_png =
-      'assets/images/flutter_candies_logo.png';
+      'packages/module_a/assets/images/flutter_candies_logo.png';
 
-  static const String assets_images_test_txt = 'assets/images/test.txt';
+  static const String assets_images_test_txt =
+      'packages/module_a/assets/images/test.txt';
 
-  static const String assets_xxx_md = 'assets/xxx.md';
+  static const String assets_xxx_md = 'packages/module_a/assets/xxx.md';
 }
 
 final List<String> assetsArray = <String>[

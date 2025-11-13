@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:assets_generator/assets_generator.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:mime/mime.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 
 const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************
@@ -43,7 +43,9 @@ class Template {
     this.constIgnore,
     this.constArray,
     this.package,
+    this.useKeyName,
     this.classPrefix,
+    this.rootPackageName,
   );
   final PackageNode? packageGraph;
   final List<String> assets;
@@ -52,7 +54,9 @@ class Template {
   final RegExp? constIgnore;
   final bool? constArray;
   final bool package;
+  final bool useKeyName;
   final bool classPrefix;
+  final String? rootPackageName;
 
   Future<String> generateFile(
     Map<String, String> miss,
@@ -70,7 +74,14 @@ class Template {
       '{0}',
       className,
     ));
-    if (!packageGraph!.isRoot || package) {
+
+    // Determine if current package is root: use rootPackageName if provided,
+    // otherwise fall back to packageGraph.isRoot
+    final bool isRoot = rootPackageName != null
+        ? packageGraph!.name == rootPackageName
+        : packageGraph!.isRoot;
+
+    if ((!isRoot || package) && !useKeyName) {
       sb.write(
           '''\nstatic const String package = '${packageGraph!.name}';\n''');
     }
@@ -89,15 +100,24 @@ class Template {
       final String? mimeType = lookupMimeType(asset);
       final bool isImage = mimeType != null && mimeType.startsWith('image/');
       if (isImage) {
+        // filePath uses POSIX-style separators in assets list; split and join
+        // with platform-native separators so preview paths are correct on
+        // Windows (\) and mac/Linux (/).
+        final List<String> segments = filePath.split('/');
+        final String localPath =
+            p.joinAll(<String>[packageGraph!.path, ...segments]);
+
         previewImageSb.write(previewTemplate1
             .replaceAll('{0}', filedName)
-            .replaceAll('{1}', join(packageGraph!.path, filePath)));
+            .replaceAll('{1}', localPath));
       }
 
       final String comment =
           isImage ? previewTemplate.replaceAll('{0}', filedName) : '';
 
-      sb.write('\n$comment${formatFiled(asset)}');
+      // const value should be the generated path when useKeyName flag is set
+      sb.write(
+          '\n$comment${formatFiled(asset, (!isRoot || package) && useKeyName ? p.posix.join('packages', packageGraph!.name, asset) : asset)}');
       if (constArray!) {
         arraySb.write('$comment$className.$filedName,\n');
       }
@@ -123,8 +143,8 @@ class Template {
     return sb.toString();
   }
 
-  String formatFiled(String path) {
-    return '''static const String ${_formatFiledName(path)} = '$path';\n''';
+  String formatFiled(String asset, String path) {
+    return '''static const String ${_formatFiledName(asset)} = '$path';\n''';
   }
 
   String _formatFiledName(String path) {
