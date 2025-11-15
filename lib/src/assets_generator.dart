@@ -155,6 +155,7 @@ class Generator {
     file.writeAsStringSync(
       formatDart(
         await template.generateFile(miss, previewFile),
+        path,
       ),
     );
     if (previewFile.existsSync()) {

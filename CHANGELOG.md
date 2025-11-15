@@ -1,3 +1,7 @@
+## 3.3.1
+
+* Support reading 'page_width' from analysis_options.yaml to control formatter page width.
+
 ## 3.3.0
 
 * add 'root-package', Specify which package should be treated as the root project (by package name) for workspace
