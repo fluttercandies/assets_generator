@@ -1,3 +1,7 @@
+## 3.3.3
+
+* Add coverage and format ignore directives to generated code.
+
 ## 3.3.1
 
 * Support reading 'page_width' from analysis_options.yaml to control formatter page width.
