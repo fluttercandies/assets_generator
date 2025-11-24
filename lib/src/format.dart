@@ -8,25 +8,18 @@ import 'package:yaml/yaml.dart' show loadYaml;
 class _Config {
   const _Config(this.sdk, this.pageWidth);
 
-  final VersionConstraint? sdk;
+  final VersionRange? sdk;
   final int? pageWidth;
 }
 
-/// The formatter will only use the tall-style if the SDK constraint is ^3.7.
+/// The formatter will only use the tall-style if the SDK constraint is ^3.7.0.
 DartFormatter _buildDartFormatter({
-  required VersionConstraint? sdk,
+  required VersionRange? sdk,
   required int? pageWidth,
 }) {
-  // bool useShort = true;
-  // if (sdk != null) {
-  //   useShort = sdk.allowsAny(VersionConstraint.parse('<3.7.0'));
-  // }
   return DartFormatter(
-    // languageVersion: useShort
-    //     ? Version(3, 6, 0)
-    //     : DartFormatter.latestLanguageVersion,
+    languageVersion: sdk?.min ?? DartFormatter.latestLanguageVersion,
     pageWidth: pageWidth,
-    lineEnding: '\n',
   );
 }
 
@@ -49,10 +42,10 @@ _Config _readConfig(String directory) {
   final Map? pubspecSource = pubspecFile.existsSync()
       ? loadYaml(pubspecFile.readAsStringSync()) as Map?
       : null;
-  final VersionConstraint? sdk;
+  final VersionRange? sdk;
   final String? rawSdk = pubspecSource?['environment']?['sdk'] as String?;
   if (rawSdk != null) {
-    sdk = VersionConstraint.parse(rawSdk);
+    sdk = VersionConstraint.parse(rawSdk) as VersionRange;
   } else {
     sdk = null;
   }
