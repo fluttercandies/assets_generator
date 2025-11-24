@@ -48,18 +48,14 @@ class Watcher {
         switch (data.type) {
           case FileSystemEvent.create:
             msg = green.wrap('create');
-            break;
           case FileSystemEvent.delete:
             msg = red.wrap('delete');
-            break;
           case FileSystemEvent.move:
             msg = yellow.wrap('move');
-            break;
           case FileSystemEvent.modify:
             break;
           case FileSystemEvent.all:
             msg = yellow.wrap('operate');
-            break;
           default:
         }
         if (msg != null) {

@@ -27,7 +27,6 @@ String formatDart(
   String content,
   String directory,
 ) {
-  return content;
   try {
     final _Config config = _readConfig(directory);
     final DartFormatter formatter =
