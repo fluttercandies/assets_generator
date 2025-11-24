@@ -1,3 +1,7 @@
+## 4.0.4+1
+
+* Improve output file headers.
+
 ## 4.0.4
 
 * Append format off header after formatted.
