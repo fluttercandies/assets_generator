@@ -1,6 +1,8 @@
-## 4.0.1
+## 4.0.2
 
-* Upgrade dependency: bump `dart_style` to ^2.3.8 for latest formatting fixes and improvements.
+* Bump `dart_style` to ^2.3.8 for latest formatting fixes and improvements.
+* Bump `build_runner_core` to allow v9 & v10.
+* Raise the minimum Dart SDK to 3.0.
 
 ## 3.3.3
 
