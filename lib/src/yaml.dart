@@ -96,9 +96,9 @@ class Yaml {
           if (flutter.containsKey('assets')) {
             final YamlList? assetsNode = flutter['assets'] as YamlList?;
             final FileSpan sourceSpan = (flutter.nodes.keys.firstWhere(
-                    (dynamic element) =>
-                        element is YamlNode &&
-                        element.span.text == 'assets') as YamlNode?)
+              (dynamic element) =>
+                  element is YamlNode && element.span.text == 'assets',
+            ) as YamlNode?)
                 ?.span as FileSpan;
 
             final int start = sourceSpan.start.offset - sourceSpan.start.column;
@@ -113,7 +113,10 @@ class Yaml {
             //Empty assets
             else {
               yamlString = yamlString.replaceRange(
-                  start, sourceSpan.end.offset + ':'.length, assetsNodeS);
+                start,
+                sourceSpan.end.offset + ':'.length,
+                assetsNodeS,
+              );
             }
           }
           //miss assets:

@@ -49,6 +49,7 @@ class Template {
     this.classPrefix,
     this.rootPackageName,
   );
+
   final PackageNode? packageGraph;
   final List<String> assets;
   final Rule? rule;
@@ -69,8 +70,10 @@ class Template {
 
     final StringBuffer arraySb = StringBuffer();
 
-    final String className =
-        class1!.go('ucc', classPrefix ? packageGraph!.name : '')!;
+    final String className = class1!.go(
+      'ucc',
+      classPrefix ? packageGraph!.name : '',
+    )!;
 
     sb.write(classDeclare.replaceAll(
       '{0}',
@@ -109,9 +112,11 @@ class Template {
         final String localPath =
             p.joinAll(<String>[packageGraph!.path, ...segments]);
 
-        previewImageSb.write(previewTemplate1
-            .replaceAll('{0}', filedName)
-            .replaceAll('{1}', localPath));
+        previewImageSb.write(
+          previewTemplate1
+              .replaceAll('{0}', filedName)
+              .replaceAll('{1}', localPath),
+        );
       }
 
       final String comment =

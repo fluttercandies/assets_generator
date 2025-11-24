@@ -1,13 +1,17 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-import 'package:assets_generator/assets_generator.dart';
-import 'package:assets_generator/src/format.dart';
-import 'package:assets_generator/src/watcher.dart';
+
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
+
+import 'arg/class.dart';
+import 'arg/rule.dart';
+import 'arg/type.dart';
+import 'format.dart';
 import 'template.dart';
+import 'watcher.dart';
 import 'yaml.dart';
 
 class Generator {
@@ -104,9 +108,11 @@ class Generator {
         );
       } else if (fileStat.type == FileSystemEntityType.file) {
         if (basename(item.path) != '.DS_Store') {
-          assets.add(item.path
-              .replaceAll('${packageGraph!.path}$separator', '')
-              .replaceAll(separator, '/'));
+          assets.add(
+            item.path
+                .replaceAll('${packageGraph!.path}$separator', '')
+                .replaceAll(separator, '/'),
+          );
         }
       }
     }
