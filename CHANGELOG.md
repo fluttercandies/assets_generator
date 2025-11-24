@@ -1,3 +1,7 @@
+## 4.0.4
+
+* Append format off header after formatted.
+
 ## 4.0.3
 
 * Bump `mime` to allow v2.
