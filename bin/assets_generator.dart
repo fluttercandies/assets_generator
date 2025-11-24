@@ -10,6 +10,7 @@ import 'package:path/path.dart';
 
 const String argumentsFile = 'assets_generator_arguments';
 const String debugArguments = '-p example/ -t f --const-ignore .md';
+
 Future<void> main(List<String> arguments) async {
   //arguments = debugArguments.split(' ');
   //regExpTest();
@@ -19,7 +20,7 @@ Future<void> main(List<String> arguments) async {
   if (false) {
     final File file = File(join('example', argumentsFile));
     if (file.existsSync()) {
-      final String content = file.readAsStringSync() + ' -p example';
+      final String content = '${file.readAsStringSync()} -p example';
       arguments = content.split(' ').map((String e) => e.trim()).toList();
       runFromLocal = true;
     }

@@ -13,14 +13,16 @@ const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // ignore_for_file: constant_identifier_names
 // coverage:ignore-file
 // dart format off
+
 ''';
 
-String get classDeclare => 'class {0} {\n const {0}._();';
+String get classDeclare => 'abstract final class {0} {';
+
 String get classDeclareFooter => '}\n';
+
 String get constsArray => '''
 final List<String> {0} = <String>[
-{1}
-];
+{1}];
 ''';
 
 const String previewTemplate1 = '''/// {@template assets_generator.{0}.preview}
@@ -75,10 +77,7 @@ class Template {
       classPrefix ? packageGraph!.name : '',
     )!;
 
-    sb.write(classDeclare.replaceAll(
-      '{0}',
-      className,
-    ));
+    sb.writeln(classDeclare.replaceAll('{0}', className));
 
     // Determine if current package is root: use rootPackageName if provided,
     // otherwise fall back to packageGraph.isRoot
@@ -87,11 +86,10 @@ class Template {
         : packageGraph!.isRoot;
 
     if ((!isRoot || package) && !useKeyName) {
-      sb.write(
-          '''\nstatic const String package = '${packageGraph!.name}';\n''');
+      sb.writeln("  static const String package = '${packageGraph!.name}';");
     }
-    final StringBuffer previewImageSb = StringBuffer();
 
+    final StringBuffer previewImageSb = StringBuffer();
     for (final String asset in assets) {
       if (constIgnore != null && constIgnore!.hasMatch(asset)) {
         continue;
@@ -119,26 +117,44 @@ class Template {
         );
       }
 
-      final String comment =
-          isImage ? previewTemplate.replaceAll('{0}', filedName) : '';
+      String comment = '';
+      if (isImage) {
+        comment = previewTemplate.replaceAll('{0}', filedName);
+      }
 
       // const value should be the generated path when useKeyName flag is set
+      if (comment.isNotEmpty) {
+        sb.write('\n  $comment');
+      }
       sb.write(
-          '\n$comment${formatFiled(asset, (!isRoot || package) && useKeyName ? p.posix.join('packages', packageGraph!.name, asset) : asset)}');
+        formatFiled(
+          asset,
+          (!isRoot || package) && useKeyName
+              ? p.posix.join('packages', packageGraph!.name, asset)
+              : asset,
+        ),
+      );
+
       if (constArray!) {
-        arraySb.write('$comment$className.$filedName,\n');
+        if (comment.isNotEmpty) {
+          arraySb.write('\n  $comment');
+        }
+        arraySb.write('  $className.$filedName,\n');
       }
     }
 
     sb.write(classDeclareFooter);
 
     if (arraySb.isNotEmpty) {
-      sb.write(constsArray
-          .replaceAll(
-            '{0}',
-            '${class1!.go('lcc', classPrefix ? packageGraph!.name : '')!}Array',
-          )
-          .replaceAll('{1}', arraySb.toString()));
+      sb.writeln();
+      sb.write(
+        constsArray
+            .replaceAll(
+              '{0}',
+              '${class1!.go('lcc', classPrefix ? packageGraph!.name : '')!}Array',
+            )
+            .replaceAll('{1}', arraySb.toString()),
+      );
     }
 
     if (previewImageSb.isNotEmpty) {
@@ -151,7 +167,7 @@ class Template {
   }
 
   String formatFiled(String asset, String path) {
-    return '''static const String ${_formatFiledName(asset)} = '$path';\n''';
+    return '''  static const String ${_formatFiledName(asset)} = '$path';\n''';
   }
 
   String _formatFiledName(String path) {
