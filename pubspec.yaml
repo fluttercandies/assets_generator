@@ -4,22 +4,22 @@ version: 4.0.1
 homepage: https://github.com/fluttercandies/assets_generator
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ^3.0.0
 
 dependencies:
   args: ^2.2.0
-  build_runner_core: ^7.1.0
+  build_runner_core: ">=7.1.0 <10.0.0"
   dart_style: ">=2.3.8 <4.0.0"
   io: ^1.0.3
   meta: ^1.7.0
-  path: ^1.8.0
-  source_span: ^1.8.1
-  yaml: ^3.1.0
   mime: ^1.0.2
+  source_span: ^1.8.1
+  path: ^1.8.0
   pub_semver: ^2.2.0
+  yaml: ^3.1.0
 
 dev_dependencies:
-  pedantic: ^1.11.1
+  lints: any
 
 executables:
   agen: assets_generator
