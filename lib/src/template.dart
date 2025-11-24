@@ -7,8 +7,7 @@ import 'package:path/path.dart' as p;
 import '../args.dart';
 
 const String headerFormatOff = '// dart format off';
-const String headerLicense = '''
-// coverage:ignore-file
+const String headerLicense = '''// coverage:ignore-file
 // ignore_for_file: constant_identifier_names
 //
 // GENERATED CODE - DO NOT MODIFY MANUALLY
