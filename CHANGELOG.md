@@ -1,3 +1,7 @@
+## 4.0.1
+
+* Upgrade dependency: bump `dart_style` to ^2.3.8 for latest formatting fixes and improvements.
+
 ## 3.3.3
 
 * Add coverage and format ignore directives to generated code.
