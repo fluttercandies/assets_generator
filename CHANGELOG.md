@@ -1,3 +1,7 @@
+## 4.0.3
+
+* Bump `mime` to allow v2.
+
 ## 4.0.2
 
 * Bump `dart_style` to ^2.3.8 for latest formatting fixes and improvements.
