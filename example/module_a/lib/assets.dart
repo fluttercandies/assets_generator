@@ -10,8 +10,10 @@ abstract final class Assets {
   static const String assets_abc_txt = 'packages/module_a/assets/abc.txt';
 
   /// {@macro assets_generator.assets_images_flutter_candies_logo_png.preview}
-  static const String assets_images_flutter_candies_logo_png = 'packages/module_a/assets/images/flutter_candies_logo.png';
-  static const String assets_images_test_txt = 'packages/module_a/assets/images/test.txt';
+  static const String assets_images_flutter_candies_logo_png =
+      'packages/module_a/assets/images/flutter_candies_logo.png';
+  static const String assets_images_test_txt =
+      'packages/module_a/assets/images/test.txt';
   static const String assets_xxx_md = 'packages/module_a/assets/xxx.md';
 }
 
