@@ -5,6 +5,8 @@ import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart' show loadYaml;
 
+import 'template.dart' show headerFormatOff;
+
 class _Config {
   const _Config(this.sdk, this.pageWidth);
 
@@ -31,7 +33,8 @@ String formatDart(
     final _Config config = _readConfig(directory);
     final DartFormatter formatter =
         _buildDartFormatter(sdk: config.sdk, pageWidth: config.pageWidth);
-    return formatter.format(content);
+    // Append headerFormatOff to avoid format again externally.
+    return '$headerFormatOff\n${formatter.format(content)}';
   } catch (e) {
     return content;
   }
