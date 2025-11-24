@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-import 'package:assets_generator/assets_generator.dart';
-import 'package:assets_generator/src/arg/root_package.dart';
+
+import 'package:assets_generator/args.dart';
+import 'package:assets_generator/assets_generator.dart' show Generator;
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';

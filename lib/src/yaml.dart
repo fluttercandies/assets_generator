@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:assets_generator/assets_generator.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
 import 'package:source_span/source_span.dart';
@@ -30,6 +29,7 @@ class Yaml {
     this.miss,
     this.formatType,
   );
+
   final File yamlFile;
   final List<String> assets;
   final List<String> miss;

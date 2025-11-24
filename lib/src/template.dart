@@ -1,9 +1,10 @@
 import 'dart:io';
 
-import 'package:assets_generator/assets_generator.dart';
 import 'package:build_runner_core/build_runner_core.dart';
 import 'package:mime/mime.dart';
 import 'package:path/path.dart' as p;
+
+import '../args.dart';
 
 const String license = '''// GENERATED CODE - DO NOT MODIFY MANUALLY
 // **************************************************************************

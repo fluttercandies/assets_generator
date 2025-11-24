@@ -1,0 +1,22 @@
+library;
+
+export 'src/arg/arg.dart';
+export 'src/arg/arg_parser.dart';
+export 'src/arg/class.dart';
+export 'src/arg/class_prefix.dart';
+export 'src/arg/const_array.dart';
+export 'src/arg/const_ignore.dart';
+export 'src/arg/folder.dart';
+export 'src/arg/folder_ignore.dart';
+export 'src/arg/g_suffix.dart';
+export 'src/arg/help.dart';
+export 'src/arg/output.dart';
+export 'src/arg/package.dart';
+export 'src/arg/package_ignore.dart';
+export 'src/arg/path.dart';
+export 'src/arg/root_package.dart';
+export 'src/arg/rule.dart';
+export 'src/arg/save.dart';
+export 'src/arg/type.dart';
+export 'src/arg/use_key_name.dart';
+export 'src/arg/watch.dart';
