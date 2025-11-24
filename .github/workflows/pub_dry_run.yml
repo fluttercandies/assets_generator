@@ -1,19 +1,23 @@
 name: Pub Publish dry run
 
-on: [push]
+on:
+  push:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   publish:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Publish
-        uses: sakebook/actions-flutter-pub-publisher@v1.3.0
+      - name: Publish dry run
+        uses: k-paxian/dart-package-publisher@master
         with:
-          credential: ${{ secrets.CREDENTIAL_JSON }}
-          flutter_package: true
-          skip_test: true
-          dry_run: true
+          credentialJson: "MockCredentialJson"
+          accessToken: "MockAccessToken"
+          refreshToken: "MockRefreshToken"
+          flutter: true
+          dryRunOnly: true
