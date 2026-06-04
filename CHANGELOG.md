@@ -1,3 +1,7 @@
+## 5.0.0
+
+* Support `package:analyzer` v12 and v13.
+
 ## 4.0.4+1
 
 * Improve output file headers.

@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:build_runner_core/build_runner_core.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
 
@@ -10,6 +9,7 @@ import 'arg/class.dart';
 import 'arg/rule.dart';
 import 'arg/type.dart';
 import 'format.dart';
+import 'package_graph.dart';
 import 'template.dart';
 import 'watcher.dart';
 import 'yaml.dart';

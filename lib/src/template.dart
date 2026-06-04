@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:build_runner_core/build_runner_core.dart';
 import 'package:mime/mime.dart';
 import 'package:path/path.dart' as p;
 
 import '../args.dart';
+import 'package_graph.dart';
 
 const String headerFormatOff = '// dart format off';
 const String headerLicense = '''// coverage:ignore-file
@@ -159,7 +159,8 @@ class Template {
     }
 
     if (previewImageSb.isNotEmpty) {
-      final String content = headerLicense + previewImageSb.toString() + mockClass;
+      final String content =
+          headerLicense + previewImageSb.toString() + mockClass;
       previewFile.createSync(recursive: true);
       previewFile.writeAsStringSync(content);
     }
