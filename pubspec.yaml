@@ -1,6 +1,6 @@
 name: assets_generator
 description: The flutter tool to generate assets‘s configs(yaml) and consts automatically for single project and multiple modules.
-version: 5.0.0
+version: 5.0.1
 homepage: https://github.com/fluttercandies/assets_generator
 
 environment:
@@ -21,6 +21,7 @@ dependencies:
 
 dev_dependencies:
   lints: any
+  test: ^1.25.0
 
 executables:
   agen: assets_generator
