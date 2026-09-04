@@ -21,6 +21,7 @@ dependencies:
 
 dev_dependencies:
   lints: any
+  test: ^1.25.0
 
 executables:
   agen: assets_generator

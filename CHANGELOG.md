@@ -1,6 +1,7 @@
 ## 5.0.0
 
 * Support `package:analyzer` v12 and v13.
+* Always end the generated `pubspec.yaml` section with a final newline.
 
 ## 4.0.4+1
 

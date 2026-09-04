@@ -145,9 +145,7 @@ class Yaml {
     //   yamlString = yamlString.replaceAll('assets:', '').trim();
     // }
 
-    yamlString = yamlString.trim();
-
-    yamlFile.writeAsStringSync(yamlString);
+    yamlFile.writeAsStringSync('${yamlString.trim()}\n');
     print(green.wrap('${yamlFile.path} is changed automatically.'));
   }
 }
